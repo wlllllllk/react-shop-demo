@@ -1,0 +1,35 @@
+//* center
+.center {
+  height: max-content;
+  width: calc(100% - 360px - 6rem);
+  //   border: 3px solid red;
+  text-align: left;
+
+  //   & > div::after {
+  //     position: absolute;
+  //     content: "123";
+  //     bottom: 0;
+  //     height: 10px;
+  //     width: 100px;
+  //     background-color: #d3d3d3;
+  //   }
+}
+
+#section-1 {
+  height: 300px;
+  width: 100%;
+  //   border: 3px solid green;
+
+  h1 {
+    height: 20%;
+  }
+
+  img {
+    height: 80%;
+    width: 100%;
+    border-radius: 3px;
+    object-fit: cover;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+}

@@ -1,0 +1,61 @@
+.small-item {
+  position: relative;
+  width: 120px;
+
+  .photo {
+    border: 3px solid black;
+    height: 90px;
+    width: 120px;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .name {
+    margin-top: auto;
+    font-weight: bolder;
+    font-size: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .ratings {
+    display: flex;
+    align-items: center;
+
+    .stars {
+      height: 13px;
+      width: 13px;
+      background-image: url("/icons/star.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-right: 0.25rem;
+    }
+  }
+
+  .price {
+    line-height: 1.2;
+    .current-price {
+      color: #dd4545;
+      font-size: 1.15rem;
+    }
+
+    .original-price {
+      font-size: 0.9rem;
+      text-decoration: line-through;
+      margin-bottom: 0.2rem;
+    }
+  }
+
+  .add-to-cart {
+    height: min-content;
+    width: min-content;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+}

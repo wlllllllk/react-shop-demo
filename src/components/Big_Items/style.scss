@@ -1,0 +1,10 @@
+.big-items {
+  // border: 3px solid pink;
+
+  height: fit-content;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
+
+  margin-top: 0.5rem;
+}
