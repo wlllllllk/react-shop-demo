@@ -1,6 +1,122 @@
 import "./style.scss";
 
+import { useState } from "react";
+import { UseCart } from "../../hooks/useCart";
+
 const Header = () => {
+  const [isCart, setCart] = useState(false);
+  const [isAccount, setAccount] = useState(false);
+  const [isEdit, setEdit] = useState(false);
+  const [isAllSelected, setAllSelected] = useState(false);
+
+  const [counter, setCounter] = useState(0);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const { cartItems, addCart, deleteCart } = UseCart();
+
+  const handleCart = () => {
+    if (!isCart) {
+      setCart(true);
+      setEdit(false);
+      setAccount(false);
+    } else {
+      setCart(false);
+      setSelectedItems([]);
+    }
+  };
+
+  const handleAccount = () => {
+    if (!isAccount) {
+      setAccount(true);
+      setCart(false);
+      addCart([{ id: `${counter}`, quantity: "123" }]);
+      setCounter(counter + 1);
+    } else {
+      setAccount(false);
+    }
+  };
+
+  const handleItemOnClick = () => {
+    alert("TODO: View product details");
+  };
+
+  const handleDelete = (index) => {
+    if (window.confirm("Are tou sure to delete this product from your cart?")) {
+      deleteCart(index);
+    }
+  };
+
+  const handleEdit = () => {
+    if (!isEdit) {
+      setEdit(true);
+      setAllSelected(false);
+    } else {
+      setEdit(false);
+      clearCart();
+    }
+  };
+
+  const handleSelect = (index) => {
+    const currentlySelected = [...selectedItems];
+    console.log(index);
+
+    if (!currentlySelected.includes(index)) {
+      currentlySelected.push(index);
+
+      if (currentlySelected.length === cartItems.length) {
+        setAllSelected(true);
+      }
+
+      setSelectedItems(currentlySelected);
+    } else {
+      let filtered = currentlySelected.filter((cs) => cs !== index);
+      setSelectedItems(filtered);
+      setAllSelected(false);
+    }
+  };
+
+  const handleBuy = () => {
+    if (selectedItems.length === 0) {
+      alert("TODO: Buy ALL Items");
+    } else {
+      alert("TODO: Buy Items | " + selectedItems);
+    }
+  };
+
+  const handleSelectAll = () => {
+    const checkboxes = document.querySelectorAll(".selector");
+    const currentlySelected = [];
+
+    if (!isAllSelected) {
+      setAllSelected(true);
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = true;
+      });
+
+      cartItems.forEach((item) => {
+        if (!currentlySelected.includes(item[0].id)) {
+          currentlySelected.push(item[0].id);
+        }
+      });
+
+      setSelectedItems(currentlySelected);
+    } else {
+      setAllSelected(false);
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+      setSelectedItems([]);
+    }
+  };
+
+  const handleClearAll = () => {
+    alert("TODO: Clear Items");
+  };
+
+  function clearCart() {
+    setSelectedItems([]);
+  }
+
   return (
     <header>
       <div className="contents">
@@ -33,12 +149,125 @@ const Header = () => {
         </div>
         <div className="action">
           <div className="cart">
-            <button className="button" id="cart-icon"></button>
-            <div className="cart-overview"></div>
+            <button
+              className="button"
+              id="cart-icon"
+              onClick={handleCart}
+            ></button>
+            {cartItems.length > 0 ? (
+              <div className="counter">{cartItems.length}</div>
+            ) : (
+              <></>
+            )}
+
+            {isCart ? (
+              <div className="cart-overview">
+                <div className="item-list">
+                  {cartItems.length > 0 ? (
+                    <div className="cart-top">
+                      <div className="first-row">
+                        <button onClick={handleEdit}>
+                          {isEdit ? "Cancel" : "Select Items"}
+                        </button>
+
+                        {isEdit ? (
+                          <button onClick={handleClearAll} className="clear">
+                            Clear
+                          </button>
+                        ) : (
+                          <></>
+                        )}
+
+                        <button onClick={handleBuy} className="buy">
+                          {/* {selectedItems.length > 0
+                            ? selectedItems.length > 1
+                              ? `Buy ${selectedItems.length} Items`
+                              : `Buy ${selectedItems.length} Item`
+                            : "Buy All"} */}
+                          {isEdit ? "Buy Selected Items" : "Buy All"}
+                        </button>
+                      </div>
+
+                      {isEdit ? (
+                        <div className="second-row">
+                          <button
+                            onClick={handleSelectAll}
+                            className={isAllSelected ? "all" : ""}
+                          >
+                            Select All
+                          </button>
+                          <div className="number">
+                            {selectedItems.length > 0
+                              ? selectedItems.length > 1
+                                ? `${selectedItems.length} Items Selected`
+                                : `${selectedItems.length} Item Selected`
+                              : "0 Item Selected"}
+                          </div>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                  {cartItems.length > 0 ? (
+                    cartItems.map((item, index) => (
+                      <div
+                        className={isEdit ? "item editing" : "item"}
+                        key={index}
+                      >
+                        {isEdit ? (
+                          <input
+                            className="selector"
+                            type="checkbox"
+                            onChange={() => {
+                              handleSelect(index);
+                            }}
+                          ></input>
+                        ) : (
+                          <></>
+                        )}
+                        <div
+                          className="photo"
+                          onClick={handleItemOnClick}
+                        ></div>
+                        <div className="text">
+                          <div className="brief">
+                            <div className="title">{`ID: ${item[0].id}`}</div>
+
+                            <div
+                              className="delete"
+                              onClick={() => {
+                                handleDelete(index);
+                              }}
+                            ></div>
+                          </div>
+                          <div className="details">
+                            <div className="quantity">{`Quantity: ${item[0].quantity}`}</div>
+                            <div className="price">$123.69</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="notice">
+                      There is nothing in the cart right now :(
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="account">
-            <button className="button" id="account-icon"></button>
-            <div className="account-overview"></div>
+            <button
+              className="button"
+              id="account-icon"
+              onClick={handleAccount}
+            ></button>
+            {isAccount ? <div className="account-overview"></div> : <></>}
           </div>
         </div>
       </div>
