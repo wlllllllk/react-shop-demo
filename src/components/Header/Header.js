@@ -110,7 +110,15 @@ const Header = () => {
   };
 
   const handleClearAll = () => {
-    alert("TODO: Clear Items");
+    const currentlySelected = selectedItems;
+    if (!currentlySelected.length > 0) alert("Nothing is selected!");
+    else {
+      if (
+        window.confirm("Are you sure to delete these products from your cart?")
+      ) {
+        deleteCart(currentlySelected);
+      }
+    }
   };
 
   function clearCart() {
@@ -222,7 +230,7 @@ const Header = () => {
                             className="selector"
                             type="checkbox"
                             onChange={() => {
-                              handleSelect(index);
+                              handleSelect(item[0].id);
                             }}
                           ></input>
                         ) : (
@@ -235,13 +243,16 @@ const Header = () => {
                         <div className="text">
                           <div className="brief">
                             <div className="title">{`ID: ${item[0].id}`}</div>
-
-                            <div
-                              className="delete"
-                              onClick={() => {
-                                handleDelete(index);
-                              }}
-                            ></div>
+                            {isEdit ? (
+                              <></>
+                            ) : (
+                              <div
+                                className="delete"
+                                onClick={() => {
+                                  handleDelete(index);
+                                }}
+                              ></div>
+                            )}
                           </div>
                           <div className="details">
                             <div className="quantity">{`Quantity: ${item[0].quantity}`}</div>

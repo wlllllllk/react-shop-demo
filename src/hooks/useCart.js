@@ -12,9 +12,15 @@ export function UseCart() {
 
     const deleteCart = (oldItem) => {
         let currentCart = [...cartItems];
-        currentCart.splice(oldItem, 1);
+        let results = currentCart;
 
-        setCartItems(currentCart);
+        oldItem.forEach((old) => {
+            results = results.filter((item) => {
+                return item[0].id !== old;
+            });
+        });
+
+        setCartItems(results);
     };
 
     return { cartItems, addCart, deleteCart };
