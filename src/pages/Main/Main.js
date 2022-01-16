@@ -45,6 +45,7 @@ const Main = () => {
                 </div>
 
                 <Promotions></Promotions>
+
             </div>
         </div>
     )

@@ -2,17 +2,8 @@ import "./style.scss";
 
 import { useState } from "react";
 
-const ChatSection = () => {
-  const [isChat, setChat] = useState(false);
+const ChatBox = ({ isChat, setChat }) => {
   const [messages, setMessage] = useState([]);
-
-  const handleChat = () => {
-    if (!isChat) {
-      setChat(true);
-    } else {
-      setChat(false);
-    }
-  };
 
   const handleSendMessage = (event) => {
     const key = event.key;
@@ -48,15 +39,11 @@ const ChatSection = () => {
 
   return (
     <>
-      <div className="fab" onClick={handleChat}>
-        <div>Talk to Us</div>
-      </div>
-
       {isChat ? (
         <div className="chat-window">
           <div className="top">
             <div className="title">Customer Service</div>
-            <div className="close" onClick={handleChat}></div>
+            <div className="close" onClick={setChat}></div>
           </div>
           <div className="middle">
             <div className="message">
@@ -84,6 +71,7 @@ const ChatSection = () => {
               type="text"
               placeholder="Type something..."
               onKeyPress={handleSendMessage}
+              autoFocus
             />
             <div id="send" className="action" onClick={handleSendMessage}>
               Send
@@ -97,4 +85,4 @@ const ChatSection = () => {
   );
 };
 
-export default ChatSection;
+export default ChatBox;
