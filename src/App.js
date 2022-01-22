@@ -5,7 +5,7 @@ import ChatButton from './components/Chat_Button/Chat_Button.js';
 import ChatBox from "./components/Chat_Box/Chat_Box.js";
 import { useState } from "react";
 
-import './App.css';
+import './App.scss';
 
 function App() {
   const [isChat, setChat] = useState(false);

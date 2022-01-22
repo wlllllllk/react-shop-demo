@@ -33,7 +33,8 @@
 
   .middle {
     margin: 1rem 1.5rem;
-    height: 70%;
+    // height: 70%;
+    height: calc(85% - 4.25rem);
     overflow-y: scroll;
 
     // scroll-snap-type: y proximity;

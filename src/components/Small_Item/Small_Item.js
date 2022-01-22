@@ -5,6 +5,7 @@ const Small_Item = (item) => {
     <div className="small-item">
       <div className="photo">
         {/* <img src={`src/photos/${item.id - item.photo}.webp`} alt="" /> */}
+        <img src={item.item.photo} alt="" />
       </div>
 
       <div className="name" title={item.item.name}>{item.item.name}</div>

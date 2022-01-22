@@ -132,3 +132,33 @@ footer {
     align-items: center;
   }
 }
+
+// ! MOBILE VERSION
+@media screen and (max-width: 1100px) {
+}
+
+@media screen and (max-width: 860px) {
+}
+
+@media screen and (max-width: 800px) {
+}
+
+@media screen and (max-width: 450px) {
+  footer {
+    .contents {
+      margin: auto 10%;
+    }
+
+    #benefits .item {
+      margin: 0 0.5rem;
+    }
+
+    #helps .details h3 {
+      margin: 1rem 0.15rem;
+    }
+
+    #about .container .details {
+      margin: 0 2rem auto 2rem;
+    }
+  }
+}

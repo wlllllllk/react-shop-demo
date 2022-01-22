@@ -1,6 +1,6 @@
 .big-item {
   position: relative;
-  height: 100%;
+  height: fit-content;
   width: fit-content;
   // border: 3px solid lightblue;
   margin-top: 0;
@@ -64,7 +64,7 @@
   }
 
   .name {
-    margin-top: 0.25rem;
+    margin: 0.25rem 0 0.5rem 0;
     font-weight: bolder;
     font-size: 1.25rem;
     line-height: 1.2;
