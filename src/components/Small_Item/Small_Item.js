@@ -1,6 +1,16 @@
 import "./style.scss";
+import { useDispatch } from "react-redux";
 
 const Small_Item = (item) => {
+  const dispatch = useDispatch();
+
+  function addCart(item_add) {
+    dispatch({
+      type: "ADD_CART",
+      item: item_add
+    });
+  }
+
   return (
     <div className="small-item">
       <div className="photo">
@@ -20,7 +30,7 @@ const Small_Item = (item) => {
         <div className="original-price">${item.item.original}</div>
       </div>
 
-      <div className="add-to-cart">
+      <div className="add-to-cart" onClick={() => { addCart(item.item); }}>
         <svg
           width="30"
           height="31"

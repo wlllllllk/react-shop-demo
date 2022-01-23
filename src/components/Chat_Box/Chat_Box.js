@@ -49,7 +49,7 @@ const ChatBox = () => {
 
   return (
     <>
-      {isChatOpened === "true" ? (
+      {isChatOpened ? (
         <div className="chat-window">
           <div className="top">
             <div className="title">Customer Service</div>

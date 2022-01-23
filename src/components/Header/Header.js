@@ -1,9 +1,28 @@
 import "./style.scss";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UseCart } from "../../hooks/useCart";
+import { useSelector, useDispatch } from "react-redux";
 
 const Header = () => {
+  const isCartOpened = useSelector((state) => state.isCartOpened);
+  const cartItem = useSelector((state) => state.cartItem);
+
+  const dispatch = useDispatch();
+
+  function handleCart() {
+    dispatch({
+      type: "TOGGLE_CART",
+    });
+  }
+
+  function removeCart(id) {
+    dispatch({
+      type: "REMOVE_CART",
+      item: id,
+    })
+  }
+
   const [isCart, setCart] = useState(false);
   const [isAccount, setAccount] = useState(false);
   const [isEdit, setEdit] = useState(false);
@@ -14,16 +33,16 @@ const Header = () => {
 
   const { cartItems, addCart, deleteCart } = UseCart();
 
-  const handleCart = () => {
-    if (!isCart) {
-      setCart(true);
-      setEdit(false);
-      setAccount(false);
-    } else {
-      setCart(false);
-      setSelectedItems([]);
-    }
-  };
+  // const handleCart = () => {
+  //   if (!isCart) {
+  //     setCart(true);
+  //     setEdit(false);
+  //     setAccount(false);
+  //   } else {
+  //     setCart(false);
+  //     setSelectedItems([]);
+  //   }
+  // };
 
   const handleAccount = () => {
     if (!isAccount) {
@@ -190,16 +209,16 @@ const Header = () => {
               id="cart-icon"
               onClick={handleCart}
             ></button>
-            {cartItems.length > 0 ? (
-              <div className="counter">{cartItems.length}</div>
+            {cartItem.length > 0 ? (
+              <div className="counter">{cartItem.length}</div>
             ) : (
               <></>
             )}
 
-            {isCart ? (
+            {isCartOpened ? (
               <div className="cart-overview">
                 <div className="item-list">
-                  {cartItems.length > 0 ? (
+                  {cartItem.length > 0 ? (
                     <div className="cart-top">
                       <div className="first-row">
                         <button onClick={handleEdit}>
@@ -247,8 +266,8 @@ const Header = () => {
                   ) : (
                     <></>
                   )}
-                  {cartItems.length > 0 ? (
-                    cartItems.map((item, index) => (
+                  {cartItem.length > 0 ? (
+                    cartItem.map((item, index) => (
                       <div
                         className={isEdit ? "item editing" : "item"}
                         key={index}
@@ -258,7 +277,7 @@ const Header = () => {
                             className="selector"
                             type="checkbox"
                             onChange={() => {
-                              handleSelect(item[0].id);
+                              handleSelect(item.id);
                             }}
                           ></input>
                         ) : (
@@ -270,21 +289,21 @@ const Header = () => {
                         ></div>
                         <div className="text">
                           <div className="brief">
-                            <div className="title">{`ID: ${item[0].id}`}</div>
+                            <div className="title">{`ID: ${item.id}`}</div>
                             {isEdit ? (
                               <></>
                             ) : (
                               <div
                                 className="delete"
                                 onClick={() => {
-                                  handleDelete(index);
+                                  removeCart(item.id);
                                 }}
                               ></div>
                             )}
                           </div>
                           <div className="details">
-                            <div className="quantity">{`Quantity: ${item[0].quantity}`}</div>
-                            <div className="price">$123.69</div>
+                            <div className="quantity">{`Quantity: ${item.quantity}`}</div>
+                            <div className="price">${`${item.price * item.quantity}`}</div>
                           </div>
                         </div>
                       </div>

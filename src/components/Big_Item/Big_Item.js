@@ -1,6 +1,16 @@
 import "./style.scss";
+import { useDispatch } from "react-redux";
 
 const Item = (item) => {
+  const dispatch = useDispatch();
+
+  function addCart(item_add) {
+    dispatch({
+      type: "ADD_CART",
+      item: item_add
+    });
+  }
+
   const stars = item.item.stars;
   const star_array = [];
   for (let i = 0; i < Math.round(stars); i++) {
@@ -43,7 +53,7 @@ const Item = (item) => {
         </div>
       </div>
 
-      <div className="add-to-cart">
+      <div className="add-to-cart" onClick={() => { addCart(item.item); }}>
         <svg
           width="30"
           height="31"
