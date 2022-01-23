@@ -5,11 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // import * as serviceWorker from './serviceWorker';
-import Reducer from './Reducer';
-import { createStore } from 'redux';
+// import Reducer from './Reducer';
+// import { createStore } from 'redux';
+import { store } from './app/store';
 import { Provider } from 'react-redux';
 
-const store = createStore(Reducer);
+// const store = createStore(Reducer);
 
 ReactDOM.render(
   // <React.StrictMode>

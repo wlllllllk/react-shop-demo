@@ -1,90 +1,105 @@
-const initState = {
-    theme: 'default',
+import { createAction, createReducer } from '@reduxjs/toolkit';
+
+const openChat = createAction('chat/open');
+const closeChat = createAction('chat/close');
+
+const initialState = {
     isChatOpened: false,
     isCartOpened: false,
     cartItem: []
 }
 
-const Reducer = (state = initState, action) => {
-    switch (action.type) {
-        // chat
-        case "OPEN_CHAT":
-            return {
-                ...state,
-                isChatOpened: true
-            }
-        case "CLOSE_CHAT":
-            return {
-                ...state,
-                isChatOpened: false
-            }
+const Reducer = createReducer(initialState, (builder) => {
+    builder
+        .openCase(openChat, (state, action) => {
+            state.isChatOpened = true
+        })
+        .closeCase(closeChat, (state, action) => {
+            state.isChatOpened = false
+        })
+})
 
-        // shopping cart
-        // case "OPEN_CART":
-        //     return {
-        //         ...state,
-        //         isCartOpened: true
-        //     }
-        // case "CLOSE_CART":
-        //     return {
-        //         ...state,
-        //         isCartOpened: false
-        //     }
-        case "TOGGLE_CART":
-            if (state.isCartOpened === false) {
-                return {
-                    ...state,
-                    isCartOpened: true
-                }
-            }
-            else {
-                return {
-                    ...state,
-                    isCartOpened: false
-                }
-            }
-        case "ADD_CART":
-            let currentItems = state.cartItem;
-            let isExist = false;
 
-            const newItem = action.item;
-            for (let i = 0; i < currentItems.length; i++) {
-                if (newItem.id === currentItems[i].id) {
-                    currentItems[i].quantity += 1;
-                    isExist = true;
-                    break;
-                }
-            }
+// const Reducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         // chat
+//         case "OPEN_CHAT":
+//             return {
+//                 ...state,
+//                 isChatOpened: true
+//             }
+//         case "CLOSE_CHAT":
+//             return {
+//                 ...state,
+//                 isChatOpened: false
+//             }
 
-            if (!isExist) {
-                const object = { "id": newItem.id, "quantity": 1, "price": newItem.current };
-                currentItems.push(object);
-            }
+//         // shopping cart
+//         // case "OPEN_CART":
+//         //     return {
+//         //         ...state,
+//         //         isCartOpened: true
+//         //     }
+//         // case "CLOSE_CART":
+//         //     return {
+//         //         ...state,
+//         //         isCartOpened: false
+//         //     }
+//         case "TOGGLE_CART":
+//             if (state.isCartOpened === false) {
+//                 return {
+//                     ...state,
+//                     isCartOpened: true
+//                 }
+//             }
+//             else {
+//                 return {
+//                     ...state,
+//                     isCartOpened: false
+//                 }
+//             }
+//         case "ADD_CART":
+//             let currentItems = state.cartItem;
+//             let isExist = false;
 
-            return {
-                ...state,
-                cartItem: currentItems
-            }
+//             const newItem = action.item;
+//             for (let i = 0; i < currentItems.length; i++) {
+//                 if (newItem.id === currentItems[i].id) {
+//                     currentItems[i].quantity += 1;
+//                     isExist = true;
+//                     break;
+//                 }
+//             }
 
-        case "REMOVE_CART":
-            let oldItems = state.cartItem;
-            const removeItem = action.item;
+//             if (!isExist) {
+//                 const object = { "id": newItem.id, "quantity": 1, "price": newItem.current };
+//                 currentItems.push(object);
+//             }
 
-            for (let i = 0; i < oldItems.length; i++) {
-                if (removeItem === oldItems[i].id) {
-                    oldItems.splice(i, 1);
-                    break;
-                }
-            }
+//             return {
+//                 ...state,
+//                 cartItem: currentItems
+//             }
 
-            return {
-                ...state,
-                cartItem: oldItems
-            }
+//         case "REMOVE_CART":
+//             let oldItems = state.cartItem;
+//             const removeItem = action.item;
 
-        default:
-            return state
-    }
-}
+//             for (let i = 0; i < oldItems.length; i++) {
+//                 if (removeItem === oldItems[i].id) {
+//                     oldItems.splice(i, 1);
+//                     break;
+//                 }
+//             }
+
+//             return {
+//                 ...state,
+//                 cartItem: oldItems
+//             }
+
+//         default:
+//             return state
+//     }
+// }
 
 export default Reducer;

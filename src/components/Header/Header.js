@@ -1,37 +1,43 @@
 import "./style.scss";
 
-import { useState, useEffect } from "react";
-import { UseCart } from "../../hooks/useCart";
+import { useState } from "react";
+// import { UseCart } from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
+import { toggle, remove } from "../../features/cartSlice";
 
 const Header = () => {
-  const isCartOpened = useSelector((state) => state.isCartOpened);
-  const cartItem = useSelector((state) => state.cartItem);
+  const isCartOpened = useSelector((state) => state.cart.isCartOpened);
+  const cartItem = useSelector((state) => state.cart.cartItem);
+  const numOfItem = useSelector((state) => state.cart.numOfItem);
 
   const dispatch = useDispatch();
+  // const isCartOpened = useSelector((state) => state.isCartOpened);
+  // const cartItem = useSelector((state) => state.cartItem);
 
-  function handleCart() {
-    dispatch({
-      type: "TOGGLE_CART",
-    });
-  }
+  // const dispatch = useDispatch();
 
-  function removeCart(id) {
-    dispatch({
-      type: "REMOVE_CART",
-      item: id,
-    })
-  }
+  // function handleCart() {
+  //   dispatch({
+  //     type: "TOGGLE_CART",
+  //   });
+  // }
 
-  const [isCart, setCart] = useState(false);
+  // function removeCart(id) {
+  //   dispatch({
+  //     type: "REMOVE_CART",
+  //     item: id,
+  //   })
+  // }
+
+  // const [isCart, setCart] = useState(false);
   const [isAccount, setAccount] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const [isAllSelected, setAllSelected] = useState(false);
 
-  const [counter, setCounter] = useState(0);
+  // const [counter, setCounter] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const { cartItems, addCart, deleteCart } = UseCart();
+  // const { cartItems, addCart, deleteCart } = UseCart();
 
   // const handleCart = () => {
   //   if (!isCart) {
@@ -47,9 +53,9 @@ const Header = () => {
   const handleAccount = () => {
     if (!isAccount) {
       setAccount(true);
-      setCart(false);
-      addCart([{ id: `${counter}`, quantity: "123" }]);
-      setCounter(counter + 1);
+      // setCart(false);
+      // addCart([{ id: `${counter}`, quantity: "123" }]);
+      // setCounter(counter + 1);
     } else {
       setAccount(false);
     }
@@ -59,11 +65,11 @@ const Header = () => {
     alert("TODO: View product details");
   };
 
-  const handleDelete = (index) => {
-    if (window.confirm("Are tou sure to delete this product from your cart?")) {
-      deleteCart(index);
-    }
-  };
+  // const handleDelete = (index) => {
+  //   if (window.confirm("Are tou sure to delete this product from your cart?")) {
+  //     deleteCart(index);
+  //   }
+  // };
 
   const handleEdit = () => {
     if (!isEdit) {
@@ -71,24 +77,24 @@ const Header = () => {
       setAllSelected(false);
     } else {
       setEdit(false);
-      clearCart();
+      clearSelected();
     }
   };
 
-  const handleSelect = (index) => {
+  const handleSelect = (id) => {
     const currentlySelected = [...selectedItems];
-    console.log(index);
+    console.log(id);
 
-    if (!currentlySelected.includes(index)) {
-      currentlySelected.push(index);
+    if (!currentlySelected.includes(id)) {
+      currentlySelected.push(id);
 
-      if (currentlySelected.length === cartItems.length) {
+      if (currentlySelected.length === cartItem.length) {
         setAllSelected(true);
       }
 
       setSelectedItems(currentlySelected);
     } else {
-      let filtered = currentlySelected.filter((cs) => cs !== index);
+      let filtered = currentlySelected.filter((cs) => cs !== id);
       setSelectedItems(filtered);
       setAllSelected(false);
     }
@@ -96,7 +102,7 @@ const Header = () => {
 
   const handleBuy = () => {
     if (selectedItems.length === 0) {
-      alert("TODO: Buy ALL Items");
+      alert("TODO: Nothing is selected");
     } else {
       alert("TODO: Buy Items | " + selectedItems);
     }
@@ -112,9 +118,10 @@ const Header = () => {
         checkbox.checked = true;
       });
 
-      cartItems.forEach((item) => {
-        if (!currentlySelected.includes(item[0].id)) {
-          currentlySelected.push(item[0].id);
+      cartItem.forEach((item) => {
+        console.log(item);
+        if (!currentlySelected.includes(item.id)) {
+          currentlySelected.push(item.id);
         }
       });
 
@@ -135,12 +142,17 @@ const Header = () => {
       if (
         window.confirm("Are you sure to delete these products from your cart?")
       ) {
-        deleteCart(currentlySelected);
+        clearSelected();
+        dispatch(remove(currentlySelected));
       }
     }
   };
 
-  function clearCart() {
+  function clearSelected() {
+    const checkboxes = document.querySelectorAll(".selector");
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
     setSelectedItems([]);
   }
 
@@ -179,6 +191,21 @@ const Header = () => {
             fill="#8BB457"
           />
         </svg>
+        <svg
+          id="logo-small"
+          width="36"
+          height="36"
+          viewBox="0 0 36 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M36 0H0V36H36V0Z" fill="white" />
+          <path
+            d="M28.4736 8H8.26322V10.5263H28.4736V8ZM29.7368 20.6316V18.1053L28.4736 11.7895H8.26322L7 18.1053V20.6316H8.26322V28.2106H20.8947V20.6316H25.9474V28.2106H28.4736V20.6316H29.7368ZM18.3684 25.6841H10.7895V20.6316H18.3684V25.6841Z"
+            fill="#8BB457"
+          />
+        </svg>
+
         <span id="search-icon">
           <svg
             width="25"
@@ -193,6 +220,22 @@ const Header = () => {
             />
           </svg>
         </span>
+        {/* 
+        <span id="cart-icon">
+          <svg
+            width="25"
+            height="25"
+            viewBox="0 0 25 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.833359 0C0.612338 0 0.40037 0.0877973 0.244085 0.244078C0.0878001 0.400358 0 0.61232 0 0.833333C0 1.05435 0.0878001 1.26631 0.244085 1.42259C0.40037 1.57887 0.612338 1.66667 0.833359 1.66667H2.68342L3.35177 4.345L5.84851 17.6533C5.88426 17.8443 5.98561 18.0168 6.13504 18.1409C6.28447 18.2651 6.47259 18.3332 6.66687 18.3333H8.33359C7.44951 18.3333 6.60164 18.6845 5.9765 19.3096C5.35135 19.9348 5.00015 20.7826 5.00015 21.6667C5.00015 22.5507 5.35135 23.3986 5.9765 24.0237C6.60164 24.6488 7.44951 25 8.33359 25C9.21767 25 10.0655 24.6488 10.6907 24.0237C11.3158 23.3986 11.667 22.5507 11.667 21.6667C11.667 20.7826 11.3158 19.9348 10.6907 19.3096C10.0655 18.6845 9.21767 18.3333 8.33359 18.3333H20.0006C19.1165 18.3333 18.2687 18.6845 17.6435 19.3096C17.0184 19.9348 16.6672 20.7826 16.6672 21.6667C16.6672 22.5507 17.0184 23.3986 17.6435 24.0237C18.2687 24.6488 19.1165 25 20.0006 25C20.8847 25 21.7326 24.6488 22.3577 24.0237C22.9829 23.3986 23.3341 22.5507 23.3341 21.6667C23.3341 20.7826 22.9829 19.9348 22.3577 19.3096C21.7326 18.6845 20.8847 18.3333 20.0006 18.3333H21.6673C21.8616 18.3332 22.0497 18.2651 22.1992 18.1409C22.3486 18.0168 22.4499 17.8443 22.4857 17.6533L24.9858 4.32C25.0083 4.19973 25.004 4.07597 24.9733 3.95753C24.9426 3.83908 24.8862 3.72886 24.8081 3.63467C24.73 3.54049 24.6321 3.46467 24.5213 3.41258C24.4106 3.3605 24.2898 3.33345 24.1674 3.33333H4.81682L4.14179 0.631667C4.09681 0.451306 3.99281 0.291165 3.84634 0.176708C3.69986 0.0622511 3.51933 5.13525e-05 3.33344 0H0.833359ZM7.35856 16.6667L5.17016 5H23.164L20.9756 16.6667H7.35856V16.6667ZM10.0003 21.6667C10.0003 22.1087 9.82471 22.5326 9.51214 22.8452C9.19957 23.1577 8.77563 23.3333 8.33359 23.3333C7.89155 23.3333 7.46761 23.1577 7.15504 22.8452C6.84247 22.5326 6.66687 22.1087 6.66687 21.6667C6.66687 21.2246 6.84247 20.8007 7.15504 20.4882C7.46761 20.1756 7.89155 20 8.33359 20C8.77563 20 9.19957 20.1756 9.51214 20.4882C9.82471 20.8007 10.0003 21.2246 10.0003 21.6667V21.6667ZM21.6673 21.6667C21.6673 22.1087 21.4917 22.5326 21.1792 22.8452C20.8666 23.1577 20.4427 23.3333 20.0006 23.3333C19.5586 23.3333 19.1346 23.1577 18.8221 22.8452C18.5095 22.5326 18.3339 22.1087 18.3339 21.6667C18.3339 21.2246 18.5095 20.8007 18.8221 20.4882C19.1346 20.1756 19.5586 20 20.0006 20C20.4427 20 20.8666 20.1756 21.1792 20.4882C21.4917 20.8007 21.6673 21.2246 21.6673 21.6667V21.6667Z"
+              fill="black"
+            />
+          </svg>
+        </span> */}
+
         <div className="searchBar">
           <input
             type="text"
@@ -206,11 +249,13 @@ const Header = () => {
           <div className="cart">
             <button
               className="button"
-              id="cart-icon"
-              onClick={handleCart}
+              id="cart-button"
+              onClick={() => {
+                dispatch(toggle());
+              }}
             ></button>
             {cartItem.length > 0 ? (
-              <div className="counter">{cartItem.length}</div>
+              <div className="counter">{numOfItem}</div>
             ) : (
               <></>
             )}
@@ -274,6 +319,7 @@ const Header = () => {
                       >
                         {isEdit ? (
                           <input
+                            id={`item-${item.id}`}
                             className="selector"
                             type="checkbox"
                             onChange={() => {
@@ -296,14 +342,16 @@ const Header = () => {
                               <div
                                 className="delete"
                                 onClick={() => {
-                                  removeCart(item.id);
+                                  dispatch(remove([item.id]));
                                 }}
                               ></div>
                             )}
                           </div>
                           <div className="details">
                             <div className="quantity">{`Quantity: ${item.quantity}`}</div>
-                            <div className="price">${`${item.price * item.quantity}`}</div>
+                            <div className="price">
+                              ${`${+(item.price * item.quantity).toFixed(1)}`}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -322,7 +370,7 @@ const Header = () => {
           <div className="account">
             <button
               className="button"
-              id="account-icon"
+              id="account-button"
               onClick={handleAccount}
             ></button>
             {isAccount ? <div className="account-overview"></div> : <></>}

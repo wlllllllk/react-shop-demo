@@ -2,16 +2,17 @@ import "./style.scss";
 
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { close } from '../../features/chatSlice';
 
 const ChatBox = () => {
-  const isChatOpened = useSelector((state) => state.isChatOpened);
+  const isChatOpened = useSelector((state) => state.chat.isChatOpened);
   const dispatch = useDispatch();
 
-  function handleChat() {
-    dispatch({
-      type: "CLOSE_CHAT",
-    });
-  }
+  // function handleChat() {
+  //   dispatch({
+  //     type: "CLOSE_CHAT",
+  //   });
+  // }
 
   const [messages, setMessage] = useState([]);
 
@@ -53,7 +54,7 @@ const ChatBox = () => {
         <div className="chat-window">
           <div className="top">
             <div className="title">Customer Service</div>
-            <div className="close" onClick={handleChat}></div>
+            <div className="close" onClick={() => { dispatch(close()) }}></div>
           </div>
           <div className="middle">
             <div className="message">

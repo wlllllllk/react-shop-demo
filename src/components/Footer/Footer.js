@@ -1,5 +1,6 @@
 import "./style.scss";
 import { useDispatch } from "react-redux";
+import { open } from '../../features/chatSlice';
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ const Footer = () => {
           <div className="details">
             <h3>Shopping Guide</h3>
             <div className="v-separator"></div>
-            <h3 onClick={handleChat}>Customer Service</h3>
+            <h3 onClick={() => { dispatch(open()) }}>Customer Service</h3>
             <div className="v-separator"></div>
             <h3>Return a Product</h3>
           </div>
