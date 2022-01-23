@@ -1,6 +1,15 @@
 import "./style.scss";
+import { useDispatch } from "react-redux";
 
-const Footer = ({ setChat }) => {
+const Footer = () => {
+  const dispatch = useDispatch();
+
+  function handleChat() {
+    dispatch({
+      type: "OPEN_CHAT",
+    });
+  }
+
   return (
     <footer>
       <div className="contents">
@@ -50,7 +59,7 @@ const Footer = ({ setChat }) => {
           <div className="details">
             <h3>Shopping Guide</h3>
             <div className="v-separator"></div>
-            <h3 onClick={setChat}>Customer Service</h3>
+            <h3 onClick={handleChat}>Customer Service</h3>
             <div className="v-separator"></div>
             <h3>Return a Product</h3>
           </div>

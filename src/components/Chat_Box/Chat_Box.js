@@ -1,8 +1,18 @@
 import "./style.scss";
 
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-const ChatBox = ({ isChat, setChat }) => {
+const ChatBox = () => {
+  const isChatOpened = useSelector((state) => state.isChatOpened);
+  const dispatch = useDispatch();
+
+  function handleChat() {
+    dispatch({
+      type: "CLOSE_CHAT",
+    });
+  }
+
   const [messages, setMessage] = useState([]);
 
   const handleSendMessage = (event) => {
@@ -39,11 +49,11 @@ const ChatBox = ({ isChat, setChat }) => {
 
   return (
     <>
-      {isChat ? (
+      {isChatOpened === "true" ? (
         <div className="chat-window">
           <div className="top">
             <div className="title">Customer Service</div>
-            <div className="close" onClick={setChat}></div>
+            <div className="close" onClick={handleChat}></div>
           </div>
           <div className="middle">
             <div className="message">
