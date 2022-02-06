@@ -14,14 +14,12 @@ const Main = () => {
     const handleScrollPrevious = (list) => {
         const element = document.querySelector(list);
         let current = element.scrollLeft;
-        console.log(current);
         element.scrollLeft = current - 120;
     };
 
     const handleScrollNext = (list) => {
         const element = document.querySelector(list);
         let current = element.scrollLeft;
-        console.log(current);
         element.scrollLeft = current + 120;
     };
 

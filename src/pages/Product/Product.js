@@ -9,18 +9,20 @@ import { useEffect } from "react";
 import "./style.scss";
 
 const Product = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
+  const { productID } = useParams();
+  let productID_number = parseInt(productID);
 
-    const { productID } = useParams();
+  const products = require("../../database/products.json");
+  let result = products.filter((product) => {
+    return product.id === productID_number;
+  });
 
-    return (
-        <div className="product">
-            Product Page of {productID}
-        </div>
-    );
+  const currentProduct = result[0];
+  return <div className="product">Product Page of {currentProduct.name}</div>;
 };
 
 export default Product;
