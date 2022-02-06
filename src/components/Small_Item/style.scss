@@ -1,11 +1,13 @@
 .small-item {
   position: relative;
   width: 120px;
+  scroll-snap-align: start;
 
   .photo {
     // border: 3px solid black;
     height: 90px;
     width: 120px;
+    cursor: pointer;
 
     img {
       border-radius: 3px;
@@ -22,6 +24,11 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .ratings {

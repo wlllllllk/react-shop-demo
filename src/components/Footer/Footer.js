@@ -5,12 +5,6 @@ import { open } from '../../features/chatSlice';
 const Footer = () => {
   const dispatch = useDispatch();
 
-  function handleChat() {
-    dispatch({
-      type: "OPEN_CHAT",
-    });
-  }
-
   return (
     <footer>
       <div className="contents">
@@ -96,7 +90,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyright">
-        <p>Copyright &copy; 2021 WL. All Rights Reserved.</p>
+        <p>Copyright &copy; 2022 WL. All Rights Reserved.</p>
       </div>
     </footer>
   );

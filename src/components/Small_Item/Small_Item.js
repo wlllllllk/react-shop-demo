@@ -1,8 +1,10 @@
 import "./style.scss";
 import { useDispatch } from "react-redux";
 import { add } from '../../features/cartSlice';
+import { useNavigate } from "react-router-dom";
 
 const Small_Item = (item) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // function addCart(item_add) {
@@ -14,12 +16,12 @@ const Small_Item = (item) => {
 
   return (
     <div className="small-item">
-      <div className="photo">
+      <div className="photo" onClick={() => { navigate(`/product/${item.item.id}`) }}>
         {/* <img src={`src/photos/${item.id - item.photo}.webp`} alt="" /> */}
         <img src={item.item.photo} alt="" />
       </div>
 
-      <div className="name" title={item.item.name}>{item.item.name}</div>
+      <div className="name" title={item.item.name} onClick={() => { navigate(`/product/${item.item.id}`) }}>{item.item.name}</div>
 
       <div className="ratings">
         <div className="stars"></div>

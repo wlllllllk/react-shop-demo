@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
             }
 
             if (!isExist) {
-                const object = { "id": newItem.id, "quantity": 1, "price": newItem.current };
+                const object = { "id": newItem.id, "quantity": 1, "price": newItem.current, "name": newItem.name };
                 currentItems.push(object);
             }
 

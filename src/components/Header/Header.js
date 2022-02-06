@@ -1,11 +1,15 @@
 import "./style.scss";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 // import { UseCart } from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle, remove } from "../../features/cartSlice";
 
 const Header = () => {
+  const navigate = useNavigate();
   const isCartOpened = useSelector((state) => state.cart.isCartOpened);
   const cartItem = useSelector((state) => state.cart.cartItem);
   const numOfItem = useSelector((state) => state.cart.numOfItem);
@@ -180,6 +184,7 @@ const Header = () => {
           viewBox="0 0 180 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => { navigate("/") }}
         >
           <path d="M180 0H0V36H180V0Z" fill="white" />
           <path
@@ -198,6 +203,7 @@ const Header = () => {
           viewBox="0 0 36 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => { navigate("/") }}
         >
           <path d="M36 0H0V36H36V0Z" fill="white" />
           <path
@@ -205,6 +211,7 @@ const Header = () => {
             fill="#8BB457"
           />
         </svg>
+
 
         <span id="search-icon">
           <svg
@@ -335,7 +342,7 @@ const Header = () => {
                         ></div>
                         <div className="text">
                           <div className="brief">
-                            <div className="title">{`ID: ${item.id}`}</div>
+                            <div className="title">{item.name}</div>
                             {isEdit ? (
                               <></>
                             ) : (
