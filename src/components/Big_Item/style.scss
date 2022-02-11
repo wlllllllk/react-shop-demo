@@ -18,19 +18,19 @@
     background-color: #f0f0f0;
     font-style: italic;
 
-    .star-holder {
-      display: flex;
-      align-items: center;
+    // .star-holder {
+    //   display: flex;
+    //   align-items: center;
 
-      .stars {
-        height: 13px;
-        width: 13px;
-        background-image: url("/icons/star.svg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        margin-right: 0.25rem;
-      }
-    }
+    //   .star {
+    //     height: 13px;
+    //     width: 13px;
+    //     background-image: url("/icons/star.svg");
+    //     background-repeat: no-repeat;
+    //     background-size: cover;
+    //     margin-right: 0.25rem;
+    //   }
+    // }
 
     &::after {
       content: "";

@@ -25,7 +25,7 @@ const Small_Item = (item) => {
 
       <div className="ratings">
         <div className="stars"></div>
-        <div className="number">{item.item.stars !== Math.floor(item.item.stars) ? item.item.stars : `${item.item.stars}.0`}</div>
+        <div className="number">{item.item.stars.toFixed(1)}</div>
       </div>
 
       <div className="price">

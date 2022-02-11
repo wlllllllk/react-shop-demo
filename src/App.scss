@@ -4,7 +4,14 @@
   --default-radius: 3px;
 
   --clr-main: #8bb457;
+  --clr-main-dark: #4d6928;
   --clr-red: #dd4545;
+  --clr-orange: #dd9745;
+  --clr-orange-2: #fac91d;
+  --clr-transparent-grey: #d3d3d3;
+  --clr-grey: #8f8f8f;
+  --clr-grey-2: #50555c;
+  --clr-grey-3: #e5e5e5;
 }
 
 .App {
@@ -35,6 +42,20 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.star-container {
+  display: flex;
+  align-items: center;
+
+  .star {
+    height: 13px;
+    width: 13px;
+    background-image: url("/icons/star.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-right: 0.25rem;
+  }
 }
 
 @keyframes App-logo-spin {

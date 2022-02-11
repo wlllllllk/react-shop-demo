@@ -24,13 +24,15 @@ const Item = (item) => {
   return (
     <div className="big-item">
       <div className="comment-highlight">
-        <div className="star-holder">
+        <div className="star-container">
           {star_array.map((star, index) => (
-            <div className="stars" key={index}>
+            <div className="star" key={index}>
               {star}
             </div>
           ))}
-          <div className="number">{item.item.stars !== Math.floor(item.item.stars) ? item.item.stars : `${item.item.stars}.0`}</div>
+          {/* <div className="number">{item.item.stars !== Math.floor(item.item.stars) ? item.item.stars : `${item.item.stars}.0`}</div> */}
+          <div className="number">{item.item.stars.toFixed(1)}</div>
+
         </div>
         <div className="text">
           {/* 123 */}

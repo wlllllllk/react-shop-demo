@@ -1,14 +1,14 @@
 import SmallItem from "../Small_Item/Small_Item.js";
 import "./style.scss";
 
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 
-import SwiperCore, { Navigation } from "swiper";
+// import SwiperCore, { Navigation } from "swiper";
 
 // install Swiper modules
-SwiperCore.use([Navigation]);
+// SwiperCore.use([Navigation]);
 
 const items = [
   {

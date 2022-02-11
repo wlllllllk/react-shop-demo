@@ -5,14 +5,9 @@ import Error from "./pages/Error/Error.js";
 import Footer from "./components/Footer/Footer.js";
 import ChatButton from "./components/Chat_Button/Chat_Button.js";
 import ChatBox from "./components/Chat_Box/Chat_Box.js";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.scss";
 
