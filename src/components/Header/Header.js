@@ -41,6 +41,9 @@ const Header = () => {
   // const [counter, setCounter] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
 
+  const [isMenuOpened, setMenuOpened] = useState(false);
+  const [isSearchOpened, setSearchOpened] = useState(false);
+
   // const { cartItems, addCart, deleteCart } = UseCart();
 
   // const handleCart = () => {
@@ -152,6 +155,14 @@ const Header = () => {
     }
   };
 
+  const handleMenuOnClick = () => {
+    setMenuOpened(!isMenuOpened);
+  };
+
+  const handleSearchOnClick = () => {
+    setSearchOpened(!isSearchOpened);
+  };
+
   function clearSelected() {
     const checkboxes = document.querySelectorAll(".selector");
     checkboxes.forEach((checkbox) => {
@@ -163,7 +174,31 @@ const Header = () => {
   return (
     <header>
       <div className="contents">
-        <span id="menu-icon">
+        {isMenuOpened ?
+          <div className="menu-content">
+            123456
+          </div>
+          :
+          <></>
+        }
+
+        {isSearchOpened ?
+          <div className="search-container">
+            <div className="searchBar">
+              <input
+                type="text"
+                id="bar"
+                name="name"
+                placeholder="Type to Search..."
+              />
+              <button className="button" id="searchIcon"></button>
+            </div>
+          </div>
+          :
+          <></>
+        }
+
+        <span id="menu-icon" onClick={handleMenuOnClick}>
           <svg
             width="30"
             height="30"
@@ -213,7 +248,7 @@ const Header = () => {
         </svg>
 
 
-        <span id="search-icon">
+        <span id="search-icon" onClick={handleSearchOnClick}>
           <svg
             width="25"
             height="25"
