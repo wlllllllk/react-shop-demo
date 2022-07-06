@@ -96,11 +96,12 @@
       }
     }
 
-    // .anchor {
-    //   display: block;
-    //   height: 3rem;
-    //   scroll-snap-align: end;
-    // }
+    .anchor {
+      display: block;
+      height: 100px;
+      width: 100%;
+      background-color: red;
+    }
   }
 
   .bottom {

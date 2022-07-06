@@ -28,10 +28,13 @@ const ChatBox = () => {
 
         document.querySelector("#input").value = "";
 
-        let chat = document.querySelector(".middle");
-        chat.scrollTop = chat.scrollHeight;
+        // let chat = document.querySelector(".middle");
+        // chat.scrollTop = chat.scrollHeight;
 
         // console.log("Height: ", chat.scrollHeight);
+
+        document.querySelector("#anchor").focus();
+        console.log(document.querySelector("#anchor"));
       }
     } else {
       // Send button is pressed
@@ -42,8 +45,11 @@ const ChatBox = () => {
 
         document.querySelector("#input").value = "";
 
-        let chat = document.querySelector(".middle");
-        chat.scrollTop = chat.scrollHeight;
+        // let chat = document.querySelector(".middle");
+        // chat.scrollTop = chat.scrollHeight;
+
+        document.querySelector("#anchor").focus();
+        console.log(document.querySelector("#anchor"));
       }
     }
   };
@@ -74,7 +80,7 @@ const ChatBox = () => {
                 </div>
               </div>
             ))}
-            <div className="anchor"></div>
+            <div id="anchor"></div>
           </div>
           <div className="bottom">
             <input
