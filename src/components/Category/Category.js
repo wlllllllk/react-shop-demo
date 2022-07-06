@@ -1,31 +1,39 @@
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
 
-const cat = [
-  "Heavy",
-  "Fruit",
-  "Frozen",
-  "Snacks",
-  "Drinks",
-  "Noodles",
-  "Rice",
-  "Soup",
-  "Breakfast",
-  "Organics",
-  "Medicines",
-  "Coupons",
-  "Papers",
-  "House Cleaning",
-  "Body Care",
-  "Babies",
-  "Pets",
-];
+// const cat = [
+//   "Heavy",
+//   "Fruit",
+//   "Frozen",
+//   "Snacks",
+//   "Drinks",
+//   "Noodles",
+//   "Rice",
+//   "Soup",
+//   "Breakfast",
+//   "Organics",
+//   "Medicines",
+//   "Coupons",
+//   "Papers",
+//   "House Cleaning",
+//   "Body Care",
+//   "Babies",
+//   "Pets",
+// ];
 
 const sub_cat = ["Sub 1", "Sub 2", "Sub 3"];
 
 const Category = () => {
+  const navigate = useNavigate();
+
+  const categories = require("../../database/categories.json");
+  // let result = categories.filter((category) => {
+  //     return category.cat_id === parseInt(categoryID);
+  // });
+
   return (
     <div className="category">
-      <div className="banner">
+      <div className="banner" onClick={() => { navigate(`/category`) }}>
         <svg
           width="25"
           height="25"
@@ -41,9 +49,9 @@ const Category = () => {
         <h3>Categories</h3>
       </div>
       <div className="choices">
-        {cat.map((c, index) => (
+        {categories.map((c, index) => (
           <div className="each">
-            <h4 key={index}>{c}</h4>
+            <h4 key={index} onClick={() => { navigate(`/category/${c.cat_id}`) }}>{c.name}</h4>
             <div className="sub">
               {sub_cat.map((sc, index2) => (
                 <h5 key={`${index}0${index2}`}>{sc}</h5>

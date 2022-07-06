@@ -16,9 +16,10 @@ const Small_Item = (item) => {
 
   return (
     <div className="small-item">
-      <div className="photo" onClick={() => { navigate(`/product/${item.item.id}`) }}>
+      <div className="photo" onClick={() => { navigate(`/product/${item.item.prod_id}`) }}>
         {/* <img src={`src/photos/${item.id - item.photo}.webp`} alt="" /> */}
-        <img src={item.item.photo} alt="" />
+        {/* <img src={item.item.photo} alt="" /> */}
+        <img src="https://source.unsplash.com/random/200x200" alt="" />
       </div>
 
       <div className="name" title={item.item.name} onClick={() => { navigate(`/product/${item.item.id}`) }}>{item.item.name}</div>
@@ -29,8 +30,8 @@ const Small_Item = (item) => {
       </div>
 
       <div className="price">
-        <div className="current-price">${item.item.current}</div>
-        <div className="original-price">${item.item.original}</div>
+        <div className="current-price">${item.item.cur_price}</div>
+        <div className="original-price">${item.item.orig_price}</div>
       </div>
 
       <div className="add-to-cart" onClick={() => { dispatch(add(item.item)) }}>

@@ -34,6 +34,11 @@
   // }
 }
 
+.small-items.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+}
+
 @media screen and (max-width: 1600px) {
 }
 

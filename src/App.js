@@ -1,5 +1,6 @@
 import Header from "./components/Header/Header.js";
 import Main from "./pages/Main/Main.js";
+import Category from "./pages/Category/Category.js";
 import Product from "./pages/Product/Product.js";
 import Error from "./pages/Error/Error.js";
 import Footer from "./components/Footer/Footer.js";
@@ -37,6 +38,8 @@ function App() {
       <Header></Header>
       <Routes>
         <Route exact path="/" element={<Main />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/category/:categoryID" element={<Category />} />
         <Route path="/product/:productID" element={<Product />} />
         <Route path="*" element={<Error />} />
       </Routes>

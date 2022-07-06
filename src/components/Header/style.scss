@@ -4,7 +4,7 @@
 }
 
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
   height: var(--header-height);
   width: 100%;
@@ -345,6 +345,7 @@ header {
       .account-overview {
         position: absolute;
         top: calc(100% - 0.5rem);
+        right: 0%;
         height: 200px;
         width: 300px;
         background-color: white;

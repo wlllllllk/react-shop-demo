@@ -20,12 +20,23 @@ const Product = () => {
   const { productID } = useParams();
   //   let productID_number = parseInt(productID);
 
-  const products = require("../../database/products.json");
+  const products = require("../../database/products-new.json");
   let result = products.filter((product) => {
-    return product.id === parseInt(productID);
+    return product.prod_id === parseInt(productID);
   });
 
   const currentProduct = result[0];
+
+  let randomProductList = [];
+  for (let i = 0; i < 12; i++) {
+    let randomProductID = Math.floor(Math.random() * 12 + 1);
+    let randomProduct = products.filter((product) => {
+      return product.prod_id === parseInt(randomProductID);
+    });
+    randomProductList.push(randomProduct[0]);
+  }
+
+  console.log(randomProductList);
 
   const stars = currentProduct.stars;
   const star_array = [];
@@ -69,13 +80,13 @@ const Product = () => {
           <div className="small-heading origin">Country of Origin: Japan</div>
           <div className="price">
             <span className="small-heading">Price:</span>
-            <span className="current-price">${currentProduct.current}</span>
-            <span className="original-price">${currentProduct.original}</span>
+            <span className="current-price">${currentProduct.cur_price}</span>
+            <span className="original-price">${currentProduct.orig_price}</span>
             <span className="discount">
-              Saved ${currentProduct.original - currentProduct.current} (
+              Saved ${(currentProduct.orig_price - currentProduct.cur_price).toFixed(2)} (
               {(
-                ((currentProduct.original - currentProduct.current) /
-                  currentProduct.original) *
+                ((currentProduct.orig_price - currentProduct.cur_price) /
+                  currentProduct.orig_price) *
                 100
               ).toFixed(2)}
               %)
@@ -232,8 +243,8 @@ const Product = () => {
         </p>
       </div>
       <div className="third">
-        <div className="small-heading separate-with-line">Similar Items</div>
-        <SmallItems></SmallItems>
+        <div className="s{mall-heading separate-with-line">Similar Items</div>
+        <SmallItems list={randomProductList} mode=""></SmallItems>
       </div>
       <div className="fourth">
         <div className="small-heading separate-with-line">
@@ -425,7 +436,7 @@ const Product = () => {
         <div className="small-heading separate-with-line">
           You maybe interested in these items as well
         </div>
-        <SmallItems></SmallItems>
+        <SmallItems list={randomProductList} mode=""></SmallItems>
         {/* <div className="product-container">
           <span className="product"></span>
           <span className="product"></span>
