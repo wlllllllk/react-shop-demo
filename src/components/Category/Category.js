@@ -1,25 +1,6 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
-
-// const cat = [
-//   "Heavy",
-//   "Fruit",
-//   "Frozen",
-//   "Snacks",
-//   "Drinks",
-//   "Noodles",
-//   "Rice",
-//   "Soup",
-//   "Breakfast",
-//   "Organics",
-//   "Medicines",
-//   "Coupons",
-//   "Papers",
-//   "House Cleaning",
-//   "Body Care",
-//   "Babies",
-//   "Pets",
-// ];
+import SubCategory from "../Sub_Category/Sub_Category.js";
 
 const sub_cat = ["Sub 1", "Sub 2", "Sub 3"];
 
@@ -52,11 +33,7 @@ const Category = () => {
         {categories.map((c, index) => (
           <div className="each">
             <h4 key={index} onClick={() => { navigate(`/category/${c.cat_id}`) }}>{c.name}</h4>
-            <div className="sub">
-              {sub_cat.map((sc, index2) => (
-                <h5 key={`${index}0${index2}`}>{sc}</h5>
-              ))}
-            </div>
+            <SubCategory parent={c.cat_id} list={sub_cat} />
           </div>
         ))}
       </div>

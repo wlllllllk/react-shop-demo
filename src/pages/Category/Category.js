@@ -25,8 +25,6 @@ const Category = () => {
         return product.cat_id === parseInt(categoryID);
     });
 
-    console.log(result2);
-
     return (
         <div className="category-main">
             {categoryID ?

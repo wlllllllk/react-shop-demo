@@ -36,8 +36,6 @@ const Product = () => {
     randomProductList.push(randomProduct[0]);
   }
 
-  console.log(randomProductList);
-
   const stars = currentProduct.stars;
   const star_array = [];
   for (let i = 0; i < Math.round(stars); i++) {
