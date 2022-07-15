@@ -163,6 +163,13 @@ const Header = () => {
     setSearchOpened(!isSearchOpened);
   };
 
+  const handleSearch = (event) => {
+    event.preventDefault();
+    setSearchOpened(false);
+    let keywords = event.target[0].value;
+    navigate(`/search/${keywords}`);
+  };
+
   function clearSelected() {
     const checkboxes = document.querySelectorAll(".selector");
     checkboxes.forEach((checkbox) => {
@@ -182,16 +189,19 @@ const Header = () => {
           <></>
         }
 
+        {/* search bar in small screen  */}
         {isSearchOpened ?
           <div className="search-container">
             <div className="searchBar">
-              <input
-                type="text"
-                id="bar"
-                name="name"
-                placeholder="Type to Search..."
-              />
-              <button className="button" id="searchIcon"></button>
+              <form onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  id="bar"
+                  name="name"
+                  placeholder="Type to Search..."
+                />
+                <button className="button" id="searchIcon" type="submit"></button>
+              </form>
             </div>
           </div>
           :
@@ -278,14 +288,17 @@ const Header = () => {
           </svg>
         </span> */}
 
+        {/* original search bar */}
         <div className="searchBar">
-          <input
-            type="text"
-            id="bar"
-            name="name"
-            placeholder="Type to Search..."
-          />
-          <button className="button" id="searchIcon"></button>
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              id="bar"
+              name="name"
+              placeholder="Type to Search..."
+            />
+            <button className="button" id="searchIcon" type="submit"></button>
+          </form>
         </div>
         <div className="action">
           <div className="cart">

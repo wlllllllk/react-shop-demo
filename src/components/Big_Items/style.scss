@@ -6,9 +6,11 @@
   // border-radius: 8px;
 
   height: 100%;
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
+  display: flex;
+  gap: 1rem;
+  // display: grid;
+  // grid-gap: 1rem;
+  // grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
 
   margin-top: 0.5rem;
 }

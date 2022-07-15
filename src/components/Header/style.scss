@@ -67,13 +67,18 @@ header {
     margin: auto;
     outline: 1px solid #ced2d9;
     border-radius: 8px;
-    display: flex;
     align-items: center;
     cursor: text;
 
-    #bar {
+    form {
+      display: flex;
       height: 100%;
       width: 100%;
+    }
+
+    #bar {
+      height: 100%;
+      flex-grow: 1;
       padding: 0 1rem;
       background-color: #f8f8f8;
       border-top-left-radius: 8px;

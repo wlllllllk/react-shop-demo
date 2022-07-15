@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 const Sub_Category = ({ parent, list }) => {
   const navigate = useNavigate();
 
-  console.log(list);
-
   return (
     <div className="sub">
       {list.map((sc, index) => (
