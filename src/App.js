@@ -35,7 +35,7 @@ function App() {
 
   return (
     <Router>
-      {isLoaded ? <></> : <div id="loading"><img src="./loading-infinity.svg" alt=""></img></div>}
+      {isLoaded ? <></> : <div id="loading"><img src="/loading-infinity.svg" alt=""></img></div>}
       <Header></Header>
       <Routes>
         <Route exact path="/" element={<Main />} />

@@ -1,12 +1,13 @@
 import "./style.scss";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // import { UseCart } from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle, remove } from "../../features/cartSlice";
+import { useMediaQuery } from 'react-responsive'
 
 const Header = () => {
   const navigate = useNavigate();
@@ -44,6 +45,11 @@ const Header = () => {
   const [isMenuOpened, setMenuOpened] = useState(false);
   const [isSearchOpened, setSearchOpened] = useState(false);
 
+  const isSmallScreen = useMediaQuery({
+    query: '(max-width: 800px)'
+  })
+
+  useEffect(() => { setSearchOpened(false) }, [isSmallScreen]);
   // const { cartItems, addCart, deleteCart } = UseCart();
 
   // const handleCart = () => {
@@ -165,7 +171,7 @@ const Header = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    setSearchOpened(false);
+    // setSearchOpened(false);
     let keywords = event.target[0].value;
     navigate(`/search/${keywords}`);
   };
@@ -190,7 +196,7 @@ const Header = () => {
         }
 
         {/* search bar in small screen  */}
-        {isSearchOpened ?
+        {isSearchOpened && isSmallScreen ?
           <div className="search-container">
             <div className="searchBar">
               <form onSubmit={handleSearch}>
@@ -203,6 +209,7 @@ const Header = () => {
                 <button className="button" id="searchIcon" type="submit"></button>
               </form>
             </div>
+            <span onClick={handleSearchOnClick}></span>
           </div>
           :
           <></>

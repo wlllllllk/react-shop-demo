@@ -22,7 +22,7 @@ const Small_Item = (item) => {
         <img src="https://source.unsplash.com/random/200x200" alt="" />
       </div>
 
-      <div className="name" title={item.item.name} onClick={() => { navigate(`/product/${item.item.id}`) }}>{item.item.name}</div>
+      <div className="name" title={item.item.name} onClick={() => { navigate(`/product/${item.item.prod_id}`) }}>{item.item.name}</div>
 
       <div className="ratings">
         <div className="stars"></div>

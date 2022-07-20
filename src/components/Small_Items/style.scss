@@ -13,30 +13,11 @@
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-
-  // .swiper-slide {
-  //   width: auto;
-  // }
-
-  // .swiper-button-prev {
-  //   // display: none;
-  //   position: absolute;
-  //   top: 0;
-  //   left: 100%;
-  //   transform: translateX(-100%);
-  //   // right: 0;
-  //   z-index: 9999;
-  //   color: var(--clr-main);
-  // }
-
-  // .swiper-button-next {
-  //   color: var(--clr-main);
-  // }
 }
 
 .small-items.grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 }
 
 @media screen and (max-width: 1600px) {

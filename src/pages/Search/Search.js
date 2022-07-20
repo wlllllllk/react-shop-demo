@@ -15,7 +15,7 @@ const Search = () => {
     return product.name.includes(keywords);
   });
 
-  console.log(result);
+  // console.log(result);
 
   return (
     <div className="search">
@@ -24,10 +24,10 @@ const Search = () => {
           {
             result.length === 0
               ?
-              <h1> Sorry, there is no result for {keywords}</h1>
+              <h1> Sorry, there is no result for "{keywords}"</h1>
               :
               <>
-                <h1>Showing results for {keywords}</h1>
+                <h1>Showing results for "{keywords}"</h1>
                 <SmallItems list={result} mode="grid"></SmallItems>
               </>
           }
