@@ -56,7 +56,7 @@ const ChatBox = () => {
       {isChatOpened ? (
         <div className="chat-window">
           <div className="top">
-            <div className="title">Customer Service</div>
+            <div className="title">Customer Service <span>{ }</span></div>
             <div className="close" onClick={() => { dispatch(close()) }}></div>
           </div>
           <div className="middle">

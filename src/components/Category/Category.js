@@ -31,8 +31,8 @@ const Category = () => {
       </div>
       <div className="choices">
         {categories.map((c, index) => (
-          <div className="each">
-            <h4 key={index} onClick={() => { navigate(`/category/${c.cat_id}`) }}>{c.name}</h4>
+          <div key={index} className="each">
+            <h4 onClick={() => { navigate(`/category/${c.cat_id}`) }}>{c.name}</h4>
             <SubCategory parent={c.cat_id} list={sub_cat} />
           </div>
         ))}
