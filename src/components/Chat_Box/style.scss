@@ -4,6 +4,9 @@
   right: 5rem;
   height: 30rem;
   width: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   border-radius: 24px 24px 0 0;
   background-color: #f8f8f8;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -14,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1rem 1.5rem;
+    padding: 1rem 1.5rem;
 
     .title {
       font-size: 1.25rem;
@@ -23,7 +26,6 @@
     .close {
       height: 1.5rem;
       width: 1.5rem;
-      // background-color: yellow;
       background-image: url("/icons/cross.svg");
       background-size: contain;
       background-repeat: no-repeat;
@@ -32,12 +34,9 @@
   }
 
   .middle {
-    margin: 1rem 1.5rem;
-    // height: 70%;
-    height: calc(85% - 4.25rem);
+    padding: 0.75rem 1.5rem;
+    height: 100%;
     overflow-y: scroll;
-
-    // scroll-snap-type: y proximity;
 
     /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
@@ -61,7 +60,7 @@
     .message {
       display: flex;
       align-items: center;
-      margin: 0.75rem 0;
+      margin: 0 0 0.75rem 0;
       text-align: left;
 
       .icon {
@@ -96,23 +95,16 @@
       }
     }
 
-    // .anchor {
-    //   display: block;
-    //   height: 3rem;
-    //   scroll-snap-align: end;
-    // }
+    .anchor {
+      display: block;
+      height: 100px;
+      width: 100%;
+    }
   }
 
   .bottom {
-    position: absolute;
-    bottom: 2rem;
-    height: 2.25rem;
-    width: calc(100% - 3rem);
-    margin: 0 1.5rem;
-
-    background-color: white;
-    border-radius: 20px;
-    border: 1px solid #ced2d9;
+    padding: 0.75rem 1.5rem;
+    position: relative;
 
     input {
       height: 100%;
@@ -120,7 +112,8 @@
       border: none;
       border-radius: 20px;
       outline: none;
-      padding: 0 5rem 0 1.5rem;
+      padding: 0.5rem 4.5rem 0.5rem 1rem;
+      border: 1px solid #ced2d9;
       font-family: "Saira", sans-serif;
       font-size: 1rem;
     }
@@ -128,7 +121,7 @@
     .action {
       position: absolute;
       top: 50%;
-      right: 1.5rem;
+      right:2.5rem;
       transform: translateY(-50%);
       text-transform: uppercase;
       color: #0f77f0;

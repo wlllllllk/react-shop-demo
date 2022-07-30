@@ -1,6 +1,6 @@
 .product-main {
-  margin-top: 5rem + 2rem;
-  padding: 0 20%;
+  // margin-top: 5rem + 2rem;
+  padding: 0 var(--horizontal-margin);
   // border: 3px solid red;
 
   .small-heading {
@@ -116,6 +116,7 @@
         font-size: 1.75rem;
         font-weight: 500;
         line-height: 1;
+        margin-top: 2rem;
         margin-bottom: 1rem;
       }
 

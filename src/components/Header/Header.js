@@ -1,12 +1,13 @@
 import "./style.scss";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // import { UseCart } from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle, remove } from "../../features/cartSlice";
+import { useMediaQuery } from 'react-responsive'
 
 const Header = () => {
   const navigate = useNavigate();
@@ -41,6 +42,14 @@ const Header = () => {
   // const [counter, setCounter] = useState(0);
   const [selectedItems, setSelectedItems] = useState([]);
 
+  const [isMenuOpened, setMenuOpened] = useState(false);
+  const [isSearchOpened, setSearchOpened] = useState(false);
+
+  const isSmallScreen = useMediaQuery({
+    query: '(max-width: 800px)'
+  })
+
+  useEffect(() => { setSearchOpened(false) }, [isSmallScreen]);
   // const { cartItems, addCart, deleteCart } = UseCart();
 
   // const handleCart = () => {
@@ -152,6 +161,21 @@ const Header = () => {
     }
   };
 
+  const handleMenuOnClick = () => {
+    setMenuOpened(!isMenuOpened);
+  };
+
+  const handleSearchOnClick = () => {
+    setSearchOpened(!isSearchOpened);
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    // setSearchOpened(false);
+    let keywords = event.target[0].value;
+    navigate(`/search/${keywords}`);
+  };
+
   function clearSelected() {
     const checkboxes = document.querySelectorAll(".selector");
     checkboxes.forEach((checkbox) => {
@@ -163,7 +187,35 @@ const Header = () => {
   return (
     <header>
       <div className="contents">
-        <span id="menu-icon">
+        {isMenuOpened ?
+          <div className="menu-content">
+            123456
+          </div>
+          :
+          <></>
+        }
+
+        {/* search bar in small screen  */}
+        {isSearchOpened && isSmallScreen ?
+          <div className="search-container">
+            <div className="searchBar">
+              <form onSubmit={handleSearch}>
+                <input
+                  type="text"
+                  id="bar"
+                  name="name"
+                  placeholder="Type to Search..."
+                />
+                <button className="button" id="searchIcon" type="submit"></button>
+              </form>
+            </div>
+            <span onClick={handleSearchOnClick}></span>
+          </div>
+          :
+          <></>
+        }
+
+        <span id="menu-icon" onClick={handleMenuOnClick}>
           <svg
             width="30"
             height="30"
@@ -213,7 +265,7 @@ const Header = () => {
         </svg>
 
 
-        <span id="search-icon">
+        <span id="search-icon" onClick={handleSearchOnClick}>
           <svg
             width="25"
             height="25"
@@ -243,14 +295,17 @@ const Header = () => {
           </svg>
         </span> */}
 
+        {/* original search bar */}
         <div className="searchBar">
-          <input
-            type="text"
-            id="bar"
-            name="name"
-            placeholder="Type to Search..."
-          />
-          <button className="button" id="searchIcon"></button>
+          <form onSubmit={handleSearch}>
+            <input
+              type="text"
+              id="bar"
+              name="name"
+              placeholder="Type to Search..."
+            />
+            <button className="button" id="searchIcon" type="submit"></button>
+          </form>
         </div>
         <div className="action">
           <div className="cart">

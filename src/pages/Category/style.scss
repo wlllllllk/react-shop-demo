@@ -1,0 +1,47 @@
+.category-main {
+    margin: 2rem var(--horizontal-margin);
+
+    .category-blocks-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+        gap: 2rem;
+        
+        .category-block {
+            position: relative;
+            height: 10rem;
+            width: 10rem;
+            background-color: green;
+            border-radius: var(--default-radius);
+            box-shadow: var(--default-shadow);
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                img {
+                    filter: brightness(50%);
+                    transition: 0.3s;
+                }
+            }
+
+            h3 {
+                position: absolute;
+                top: 50%;
+                left: 50%; 
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: whitesmoke;
+                z-index: 1;
+            }
+
+            img {
+                height: 100%;
+                width: 100%;
+                border-radius: var(--default-radius);
+                object-fit: contain;
+                filter: brightness(80%);
+                transition: 0.3s;
+            }
+        }
+    }
+
+}

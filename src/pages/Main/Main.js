@@ -23,6 +23,17 @@ const Main = () => {
         element.scrollLeft = current + 120;
     };
 
+    const products = require("../../database/products-new.json");
+
+    let randomProductList = [];
+    for (let i = 0; i < 12; i++) {
+        let randomProductID = Math.floor(Math.random() * 12 + 1);
+        let randomProduct = products.filter((product) => {
+            return product.prod_id === parseInt(randomProductID);
+        });
+        randomProductList.push(randomProduct[0]);
+    }
+
     return (
         <div className="main">
             <div className="contents">
@@ -49,7 +60,7 @@ const Main = () => {
                         </div>
                         <div className="item-list">
                             <div className="prev"></div>
-                            <SmallItems></SmallItems>
+                            <SmallItems list={randomProductList} mode=""></SmallItems>
                             <div className="next"></div>
                         </div>
                     </div>
@@ -64,7 +75,7 @@ const Main = () => {
                         </div>
                         <div className="item-list">
                             <div className="prev"></div>
-                            <SmallItems></SmallItems>
+                            <SmallItems list={randomProductList} mode=""></SmallItems>
                             <div className="next"></div>
                         </div>
                     </div>

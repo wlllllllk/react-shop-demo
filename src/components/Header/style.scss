@@ -1,13 +1,59 @@
 //! header
+:root {
+  --header-height: 5rem;
+}
+
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  height: 5rem;
+  height: var(--header-height);
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   background-color: white;
   font-family: "Saira", sans-serif;
   z-index: 99;
+
+  .menu-content {
+    position: absolute;
+    inset: 0;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
+    width: 100%;
+    padding: 5%;
+    background-color: white;
+    animation: slide-right 1s forwards;
+  }
+
+  .search-container {
+    position: absolute;
+    inset: 0;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    // gap: 1rem;
+    height: calc(var(--header-height));
+    width: 100%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 4px;
+    animation: slide-down 1s forwards;
+    z-index: 5;
+
+    .searchBar {
+      width: 100%;
+      height: 60% !important;
+    }
+
+    span {
+      background-image: url("/icons/cross.svg");
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: center right;
+      aspect-ratio: 1;
+      height: 60%;
+      margin: 0 !important;
+    }
+  }
 
   .contents {
     display: flex;
@@ -34,13 +80,18 @@ header {
     margin: auto;
     outline: 1px solid #ced2d9;
     border-radius: 8px;
-    display: flex;
     align-items: center;
     cursor: text;
 
-    #bar {
+    form {
+      display: flex;
       height: 100%;
       width: 100%;
+    }
+
+    #bar {
+      height: 100%;
+      flex-grow: 1;
       padding: 0 1rem;
       background-color: #f8f8f8;
       border-top-left-radius: 8px;
@@ -312,6 +363,7 @@ header {
       .account-overview {
         position: absolute;
         top: calc(100% - 0.5rem);
+        right: 0%;
         height: 200px;
         width: 300px;
         background-color: white;
@@ -335,6 +387,24 @@ header {
   }
 }
 
+@keyframes slide-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-120%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @media screen and (max-width: 1600px) {
   header .contents {
     margin: auto 10%;
@@ -349,10 +419,13 @@ header {
 
 // ! MOBILE VERSION
 @media screen and (max-width: 1100px) {
+  :root {
+    --header-height: 5.75rem;
+  }
+
   header {
-    height: 5.75rem;
     .contents {
-      .searchBar {
+      & > .searchBar {
         width: 50%;
       }
     }
@@ -361,7 +434,7 @@ header {
 
 @media screen and (max-width: 860px) {
   header .contents {
-    .searchBar {
+    & > .searchBar {
       width: 45%;
     }
   }
@@ -396,7 +469,7 @@ header {
       }
     }
 
-    .searchBar {
+    & > .searchBar {
       display: none;
     }
 
@@ -413,9 +486,9 @@ header {
 
         .cart-overview {
           position: fixed;
-          left: 0.5rem;
+          left: 5%;
           top: 5rem;
-          width: calc(100% - 1rem);
+          width: calc(90%);
           // max-height: 90%;
           // height: 90%;
         }

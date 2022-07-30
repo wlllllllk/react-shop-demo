@@ -1,6 +1,6 @@
 import "./style.scss";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { close } from '../../features/chatSlice';
 
@@ -14,7 +14,17 @@ const ChatBox = () => {
   //   });
   // }
 
-  const [messages, setMessage] = useState([]);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    try {
+      let chat = document.querySelector(".middle");
+      chat.scrollTop = chat.scrollHeight;
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }, [messages, isChatOpened]);
 
   const handleSendMessage = (event) => {
     const key = event.key;
@@ -24,26 +34,19 @@ const ChatBox = () => {
       if (key === "Enter" && event.target.value !== "") {
         let all = [...messages];
         all = [...messages, event.target.value];
-        setMessage(all);
+        setMessages(all)
 
         document.querySelector("#input").value = "";
-
-        let chat = document.querySelector(".middle");
-        chat.scrollTop = chat.scrollHeight;
-
-        // console.log("Height: ", chat.scrollHeight);
       }
-    } else {
+    }
+    else {
       // Send button is pressed
       if (document.querySelector("#input").value !== "") {
         let all = [...messages];
         all = [...messages, document.querySelector("#input").value];
-        setMessage(all);
+        setMessages(all);
 
         document.querySelector("#input").value = "";
-
-        let chat = document.querySelector(".middle");
-        chat.scrollTop = chat.scrollHeight;
       }
     }
   };
@@ -53,7 +56,7 @@ const ChatBox = () => {
       {isChatOpened ? (
         <div className="chat-window">
           <div className="top">
-            <div className="title">Customer Service</div>
+            <div className="title">Customer Service <span>{ }</span></div>
             <div className="close" onClick={() => { dispatch(close()) }}></div>
           </div>
           <div className="middle">
@@ -74,7 +77,7 @@ const ChatBox = () => {
                 </div>
               </div>
             ))}
-            <div className="anchor"></div>
+            <div id="anchor"></div>
           </div>
           <div className="bottom">
             <input
