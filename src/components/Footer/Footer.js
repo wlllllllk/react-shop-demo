@@ -90,7 +90,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyright">
-        <p>Copyright &copy; 2022 WL. All Rights Reserved.</p>
+        <p>Copyright &copy; 2022 WL. All Rights Reserved. | Last Updated: 29-08-2022</p>
       </div>
     </footer>
   );

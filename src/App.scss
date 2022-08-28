@@ -35,7 +35,7 @@
 
 .App {
   text-align: center;
-  scroll-padding: 50rem
+  scroll-padding: 7rem;
 }
 
 .App-logo {
@@ -88,9 +88,9 @@
 }
 
 @media screen and (max-width: 1600px) {
-    :root {
-      --horizontal-margin: 10%;
-    }
+  :root {
+    --horizontal-margin: 10%;
+  }
 }
 
 @media screen and (max-width: 1200px) {

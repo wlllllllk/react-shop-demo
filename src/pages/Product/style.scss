@@ -236,11 +236,15 @@
       }
 
       .basics {
-        p iframe {
-          margin-top: 1rem;
-          width: 100%;
-          aspect-ratio: 16 / 9;
-          border-radius: var(--default-radius);
+        p {
+          margin-block-end: 0 !important;
+
+          iframe {
+            margin-top: 1rem;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: var(--default-radius);
+          }
         }
       }
 
@@ -394,6 +398,8 @@
   }
 
   .fifth {
+    scroll-snap-align: start;
+    scroll-padding: 10rem;
     .both {
       display: flex;
       gap: 6rem;
@@ -433,10 +439,15 @@
 
           span {
             display: inline-block;
+            width: 4ch;
 
             &:nth-child(1) {
               width: 4ch;
               text-align: right;
+            }
+
+            &:nth-child(2) {
+              text-align: left;
             }
           }
 
@@ -561,6 +572,73 @@
           width: 100%;
           background-color: var(--clr-transparent-grey);
           z-index: 9;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1600px) {
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+// ! MOBILE VERSION
+@media screen and (max-width: 1100px) {
+}
+
+@media screen and (max-width: 800px) {
+  .product-main {
+    .first {
+      flex-direction: column;
+
+      .photo {
+        position: relative;
+        top: 3rem;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 3.5rem;
+        gap: 1rem;
+
+        .main-photo {
+          grid-column: 1 / 2;
+          width: 100%;
+        }
+
+        .photo-list {
+          width: 3.75rem;
+          max-height: 30rem;
+          grid-column: 2 / 3;
+          margin-top: 0;
+          flex-direction: column;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
+    }
+
+    .fifth {
+      .both {
+        flex-direction: column;
+        gap: 2rem;
+
+        .left {
+          .review-stats {
+            width: 100%;
+
+            .detailed-stats {
+              .bar {
+                div {
+                  width: calc(100% - 8ch - 2rem);
+                }
+              }
+            }
+          }
+
+          .write-review {
+            width: 100%;
+          }
         }
       }
     }

@@ -17,10 +17,11 @@ header {
     position: absolute;
     inset: 0;
     top: var(--header-height);
-    height: calc(100vh - var(--header-height));
+    // height: calc(100vh - var(--header-height));
+    height: 100vh;
     width: 100%;
     padding: 5%;
-    background-color: white;
+    background-color: rgb(237, 237, 237);
     animation: slide-right 1s forwards;
   }
 
@@ -180,11 +181,15 @@ header {
       .cart-overview {
         position: absolute;
         top: calc(100% - 0.5rem);
-        // height: 200px;
-        max-height: 70vh;
-        height: fit-content;
+        right: 5%;
+        height: 50vh;
+        max-height: 50vh;
+        width: 400px;
 
-        width: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
         background-color: white;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
           rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
@@ -195,13 +200,18 @@ header {
 
         .item-list {
           position: relative;
-          margin: 0 1rem 1rem 1rem;
-          height: calc(100% - 2rem);
+          margin: 0 1rem auto 1rem;
+          // height: calc(100% - 2rem);
           width: calc(100% - 2rem);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
 
           .cart-top {
             position: sticky;
             top: 0;
+            width: 100%;
             padding: 1rem 0 1rem 0;
             margin-bottom: 1rem;
             background-color: white;
@@ -266,10 +276,15 @@ header {
           }
 
           .item {
+            width: 100%;
             position: relative;
             display: flex;
             margin-bottom: 1rem;
             align-items: center;
+
+            &:last-of-type {
+              margin-bottom: 1rem;
+            }
 
             input {
               // display: block;
@@ -333,7 +348,7 @@ header {
           }
 
           .notice {
-            margin-top: 1rem;
+            margin: auto;
           }
         }
       }

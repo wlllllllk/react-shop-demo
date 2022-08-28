@@ -6,15 +6,16 @@ footer {
   color: white;
   font-weight: 200;
 
-  * {
-    margin: 0;
-    cursor: default;
-  }
+  // * {
+  //   margin: 0;
+  //   cursor: default;
+  // }
 
   .contents {
     height: fit-content;
-    margin: auto 20%;
+    // margin: auto 20%;
     text-align: center;
+    padding: 0 var(--horizontal-margin);
   }
 
   .sub-section {
@@ -58,11 +59,13 @@ footer {
     padding: 2rem 0;
 
     .details {
+      width: 100%;
       display: flex;
       align-items: center;
+      justify-content: center;
+      gap: 2rem;
 
       h3 {
-        margin: 1rem 4rem;
         cursor: pointer;
         transition: 0.1s;
 
@@ -85,11 +88,11 @@ footer {
 
     .container {
       display: flex;
+      width: 100%;
+      justify-content: center;
 
       .details {
-        text-align: left;
         width: 100%;
-        margin: 0 4rem auto 4rem;
 
         h3 {
           margin-top: 1rem;
@@ -98,8 +101,9 @@ footer {
           &::after {
             position: absolute;
             content: "";
-            left: 0;
+            left: 50%;
             bottom: 0;
+            transform: translateX(-50%);
             height: 1px;
             width: 3rem;
             background-color: #d3d3d3;
@@ -135,31 +139,12 @@ footer {
 }
 
 // ! MOBILE VERSION
-@media screen and (max-width: 1100px) {
-}
-
-@media screen and (max-width: 860px) {
-}
-
-@media screen and (max-width: 800px) {
-}
-
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 568px) {
   footer {
-    .contents {
-      margin: auto 10%;
-    }
-
-    #benefits .item {
-      margin: 0 0.5rem;
-    }
-
-    #helps .details h3 {
-      margin: 1rem 0.15rem;
-    }
-
-    #about .container .details {
-      margin: 0 2rem auto 2rem;
+    #about {
+      .container {
+        flex-direction: column;
+      }
     }
   }
 }

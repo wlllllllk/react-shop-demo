@@ -10,6 +10,12 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+        open: (state) => {
+            state.isCartOpened = true
+        },
+        close: (state) => {
+            state.isCartOpened = false
+        },
         toggle: (state) => {
             state.isCartOpened = !state.isCartOpened
         },
@@ -19,16 +25,24 @@ export const cartSlice = createSlice({
 
             const newItem = action.payload;
             for (let i = 0; i < currentItems.length; i++) {
-                if (newItem.id === currentItems[i].id) {
-                    currentItems[i].quantity += 1;
+                if (newItem.prod_id === currentItems[i].prod_id) {
+                    if (newItem.quantity) {
+                        currentItems[i].quantity += newItem.quantity;
+                    }
+                    else {
+                        currentItems[i].quantity += 1;
+                    }
                     isExist = true;
                     break;
                 }
             }
 
             if (!isExist) {
-                const object = { "id": newItem.id, "quantity": 1, "price": newItem.current, "name": newItem.name };
-                currentItems.push(object);
+                let temp = { ...newItem };
+                temp.quantity = temp.quantity ? temp.quantity : 1;
+
+                // let object = { "prod_id": newItem.prod_id, "quantity": quantity, "price": newItem.cur_price, "name": newItem.name };
+                currentItems.push(temp);
             }
 
             let total = 0;
@@ -46,7 +60,7 @@ export const cartSlice = createSlice({
 
             for (let i = 0; i < removeItemID.length; i++) {
                 for (let j = 0; j < currentLength; j++) {
-                    if (removeItemID[i] === currentItems[j].id) {
+                    if (removeItemID[i] === currentItems[j].prod_id) {
                         currentItems.splice(j, 1);
                         currentLength--;
                         break;
@@ -62,9 +76,20 @@ export const cartSlice = createSlice({
             state.cartItem = currentItems;
             state.numOfItem = total;
         },
+        clear: (state) => {
+            state.cartItem = [];
+            state.numOfItem = 0;
+        },
+        load: (state) => {
+            const localData = JSON.parse(localStorage.getItem("cart"));
+            if (localData !== null) {
+                state.numOfItem = localData.numOfItem;
+                state.cartItem = localData.cartItem;
+            }
+        },
     },
 })
 
-export const { toggle, add, remove } = cartSlice.actions
+export const { open, close, toggle, add, remove, clear, load } = cartSlice.actions
 
 export default cartSlice.reducer

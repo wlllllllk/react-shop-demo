@@ -6,41 +6,27 @@ import { useNavigate } from "react-router-dom";
 
 // import { UseCart } from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle, remove } from "../../features/cartSlice";
+import { close as closeCart, toggle as toggleCart, remove as removeCart, clear as clearCart } from "../../features/cartSlice";
+import { close as closeAccount, toggle as toggleAccount } from "../../features/accountSlice";
 import { useMediaQuery } from 'react-responsive'
 
 const Header = () => {
   const navigate = useNavigate();
   const isCartOpened = useSelector((state) => state.cart.isCartOpened);
+  const isAccountOpened = useSelector((state) => state.account.isAccountOpened);
   const cartItem = useSelector((state) => state.cart.cartItem);
   const numOfItem = useSelector((state) => state.cart.numOfItem);
 
   const dispatch = useDispatch();
-  // const isCartOpened = useSelector((state) => state.isCartOpened);
-  // const cartItem = useSelector((state) => state.cartItem);
-
-  // const dispatch = useDispatch();
-
-  // function handleCart() {
-  //   dispatch({
-  //     type: "TOGGLE_CART",
-  //   });
-  // }
-
-  // function removeCart(id) {
-  //   dispatch({
-  //     type: "REMOVE_CART",
-  //     item: id,
-  //   })
-  // }
 
   // const [isCart, setCart] = useState(false);
-  const [isAccount, setAccount] = useState(false);
-  const [isEdit, setEdit] = useState(false);
-  const [isAllSelected, setAllSelected] = useState(false);
+  // const [isAccount, setAccount] = useState(false);
+
+  // const [isEdit, setEdit] = useState(false);
+  // const [isAllSelected, setAllSelected] = useState(false);
 
   // const [counter, setCounter] = useState(0);
-  const [selectedItems, setSelectedItems] = useState([]);
+  // const [selectedItems, setSelectedItems] = useState([]);
 
   const [isMenuOpened, setMenuOpened] = useState(false);
   const [isSearchOpened, setSearchOpened] = useState(false);
@@ -50,119 +36,122 @@ const Header = () => {
   })
 
   useEffect(() => { setSearchOpened(false) }, [isSmallScreen]);
-  // const { cartItems, addCart, deleteCart } = UseCart();
 
-  // const handleCart = () => {
-  //   if (!isCart) {
-  //     setCart(true);
-  //     setEdit(false);
-  //     setAccount(false);
-  //   } else {
-  //     setCart(false);
-  //     setSelectedItems([]);
-  //   }
-  // };
+  const handleCart = () => {
+    dispatch(closeAccount());
+    dispatch(toggleCart());
+    // handleUpdateSelectedItems();
+  };
 
   const handleAccount = () => {
-    if (!isAccount) {
-      setAccount(true);
-      // setCart(false);
-      // addCart([{ id: `${counter}`, quantity: "123" }]);
-      // setCounter(counter + 1);
-    } else {
-      setAccount(false);
-    }
+    dispatch(closeCart());
+    dispatch(toggleAccount());
   };
 
   const handleItemOnClick = () => {
     alert("TODO: View product details");
   };
 
-  // const handleDelete = (index) => {
-  //   if (window.confirm("Are tou sure to delete this product from your cart?")) {
-  //     deleteCart(index);
+  // const handleEdit = () => {
+  //   if (!isEdit) {
+  //     setEdit(true);
+  //     setAllSelected(false);
+  //   } else {
+  //     setEdit(false);
+  //     // clearSelected();
   //   }
   // };
 
-  const handleEdit = () => {
-    if (!isEdit) {
-      setEdit(true);
-      setAllSelected(false);
-    } else {
-      setEdit(false);
-      clearSelected();
-    }
-  };
+  // const handleSelect = (id) => {
+  //   const currentlySelected = [...selectedItems];
+  //   console.log(id);
 
-  const handleSelect = (id) => {
-    const currentlySelected = [...selectedItems];
-    console.log(id);
+  //   if (!currentlySelected.includes(id)) {
+  //     currentlySelected.push(id);
 
-    if (!currentlySelected.includes(id)) {
-      currentlySelected.push(id);
+  //     if (currentlySelected.length === cartItem.length) {
+  //       setAllSelected(true);
+  //     }
 
-      if (currentlySelected.length === cartItem.length) {
-        setAllSelected(true);
-      }
-
-      setSelectedItems(currentlySelected);
-    } else {
-      let filtered = currentlySelected.filter((cs) => cs !== id);
-      setSelectedItems(filtered);
-      setAllSelected(false);
-    }
-  };
+  //     setSelectedItems(currentlySelected);
+  //   } else {
+  //     let filtered = currentlySelected.filter((cs) => cs !== id);
+  //     setSelectedItems(filtered);
+  //     setAllSelected(false);
+  //   }
+  // };
 
   const handleBuy = () => {
-    if (selectedItems.length === 0) {
-      alert("TODO: Nothing is selected");
-    } else {
-      alert("TODO: Buy Items | " + selectedItems);
-    }
+    dispatch(closeCart());
+    navigate("/checkout");
+    // if (selectedItems.length === 0) {
+    //   alert("TODO: Nothing is selected");
+    // } else {
+    //   alert("TODO: Buy Items | " + selectedItems);
+    // }
   };
 
-  const handleSelectAll = () => {
-    const checkboxes = document.querySelectorAll(".selector");
-    const currentlySelected = [];
+  // const handleUpdateSelectedItems = () => {
+  //   const checkboxes = document.querySelectorAll(".selector");
+  //   checkboxes.forEach((checkbox) => {
+  //     // console.log(checkbox.attributes['data-id'].value);
+  //     console.log(selectedItems);
+  //     if (selectedItems.includes(Number(checkbox.attributes['data-id'].value))) {
+  //       console.log("inside");
+  //       checkbox.checked = true;
+  //       console.log(checkbox);
+  //     }
+  //   });
+  // };
 
-    if (!isAllSelected) {
-      setAllSelected(true);
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = true;
-      });
+  // const handleSelectAll = () => {
+  //   const checkboxes = document.querySelectorAll(".selector");
+  //   const currentlySelected = [];
 
-      cartItem.forEach((item) => {
-        console.log(item);
-        if (!currentlySelected.includes(item.id)) {
-          currentlySelected.push(item.id);
-        }
-      });
+  //   if (!isAllSelected) {
+  //     setAllSelected(true);
+  //     checkboxes.forEach((checkbox) => {
+  //       checkbox.checked = true;
+  //     });
 
-      setSelectedItems(currentlySelected);
-    } else {
-      setAllSelected(false);
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = false;
-      });
-      setSelectedItems([]);
-    }
-  };
+  //     cartItem.forEach((item) => {
+  //       console.log(item);
+  //       if (!currentlySelected.includes(item.prod_id)) {
+  //         currentlySelected.push(item.prod_id);
+  //       }
+  //     });
+
+  //     setSelectedItems(currentlySelected);
+  //   } else {
+  //     setAllSelected(false);
+  //     checkboxes.forEach((checkbox) => {
+  //       checkbox.checked = false;
+  //     });
+  //     setSelectedItems([]);
+  //   }
+  // };
 
   const handleClearAll = () => {
-    const currentlySelected = selectedItems;
-    if (!currentlySelected.length > 0) alert("Nothing is selected!");
-    else {
-      if (
-        window.confirm("Are you sure to delete these products from your cart?")
-      ) {
-        clearSelected();
-        dispatch(remove(currentlySelected));
-      }
+    // const currentlySelected = selectedItems;
+    // if (!currentlySelected.length > 0) alert("Nothing is selected!");
+    // else {
+
+    if (
+      window.confirm("Are you sure to delete these products from your cart?")
+    ) {
+      dispatch(clearCart());
+      // const removeList = cartItem.map(item => item.prod_id);
+      // console.log(removeList);
+      // dispatch(removeCart(removeList));
+      // clearSelected();
+      // dispatch(removeCart(currentlySelected));
     }
+    // }
   };
 
   const handleMenuOnClick = () => {
-    setMenuOpened(!isMenuOpened);
+    // setMenuOpened(!isMenuOpened);
+    alert("TODO: menu");
   };
 
   const handleSearchOnClick = () => {
@@ -176,20 +165,20 @@ const Header = () => {
     navigate(`/search/${keywords}`);
   };
 
-  function clearSelected() {
-    const checkboxes = document.querySelectorAll(".selector");
-    checkboxes.forEach((checkbox) => {
-      checkbox.checked = false;
-    });
-    setSelectedItems([]);
-  }
+  // function clearSelected() {
+  //   const checkboxes = document.querySelectorAll(".selector");
+  //   checkboxes.forEach((checkbox) => {
+  //     checkbox.checked = false;
+  //   });
+  //   setSelectedItems([]);
+  // }
 
   return (
     <header>
       <div className="contents">
         {isMenuOpened ?
           <div className="menu-content">
-            123456
+            TODO: add menu
           </div>
           :
           <></>
@@ -312,9 +301,7 @@ const Header = () => {
             <button
               className="button"
               id="cart-button"
-              onClick={() => {
-                dispatch(toggle());
-              }}
+              onClick={handleCart}
             ></button>
             {cartItem.length > 0 ? (
               <div className="counter">{numOfItem}</div>
@@ -322,75 +309,78 @@ const Header = () => {
               <></>
             )}
 
-            {isCartOpened ? (
+            {isCartOpened &&
               <div className="cart-overview">
-                <div className="item-list">
-                  {cartItem.length > 0 ? (
+                {cartItem.length > 0 ?
+                  <div className="item-list">
                     <div className="cart-top">
                       <div className="first-row">
-                        <button onClick={handleEdit}>
-                          {isEdit ? "Cancel" : "Select Items"}
+                        {/* <button onClick={handleEdit}>
+                            {isEdit ? "Cancel" : "Select Items"}
+                          </button> */}
+                        <button onClick={handleClearAll} className="clear">
+                          Clear
                         </button>
 
-                        {isEdit ? (
-                          <button onClick={handleClearAll} className="clear">
-                            Clear
-                          </button>
-                        ) : (
-                          <></>
-                        )}
+                        {/* {isEdit ? (
+                            <button onClick={handleClearAll} className="clear">
+                              Clear
+                            </button>
+                          ) : (
+                            <></>
+                          )} */}
 
                         <button onClick={handleBuy} className="buy">
                           {/* {selectedItems.length > 0
-                            ? selectedItems.length > 1
-                              ? `Buy ${selectedItems.length} Items`
-                              : `Buy ${selectedItems.length} Item`
-                            : "Buy All"} */}
-                          {isEdit ? "Buy Selected Items" : "Buy All"}
+                              ? selectedItems.length > 1
+                                ? `Buy ${selectedItems.length} Items`
+                                : `Buy ${selectedItems.length} Item`
+                              : "Buy All"} */}
+                          {/* {isEdit ? "Buy Selected Items" : "Buy All"} */}
+                          {"Buy All"}
                         </button>
                       </div>
 
-                      {isEdit ? (
-                        <div className="second-row">
-                          <button
-                            onClick={handleSelectAll}
-                            className={isAllSelected ? "all" : ""}
-                          >
-                            Select All
-                          </button>
-                          <div className="number">
-                            {selectedItems.length > 0
-                              ? selectedItems.length > 1
-                                ? `${selectedItems.length} Items Selected`
-                                : `${selectedItems.length} Item Selected`
-                              : "0 Item Selected"}
+                      {/* {isEdit ? (
+                          <div className="second-row">
+                            <button
+                              onClick={handleSelectAll}
+                              className={isAllSelected ? "all" : ""}
+                            >
+                              Select All
+                            </button>
+                            <div className="number">
+                              {selectedItems.length > 0
+                                ? selectedItems.length > 1
+                                  ? `${selectedItems.length} Items Selected`
+                                  : `${selectedItems.length} Item Selected`
+                                : "0 Item Selected"}
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  {cartItem.length > 0 ? (
-                    cartItem.map((item, index) => (
-                      <div
-                        className={isEdit ? "item editing" : "item"}
-                        key={index}
-                      >
-                        {isEdit ? (
-                          <input
-                            id={`item-${item.id}`}
-                            className="selector"
-                            type="checkbox"
-                            onChange={() => {
-                              handleSelect(item.id);
-                            }}
-                          ></input>
                         ) : (
                           <></>
-                        )}
+                        )} */}
+                    </div>
+                    {cartItem.map((item, index) => (
+                      <div
+                        // className={isEdit ? "item editing" : "item"}
+                        className={"item"}
+                        key={index}
+                      >
+                        {/* {isEdit ? (
+                            <input
+                              id={`item-${item.prod_id}`}
+                              data-id={item.prod_id}
+                              className="selector"
+                              type="checkbox"
+                              checked={false}
+                              onChange={() => {
+                                handleSelect(item.prod_id);
+                              }}
+                            ></input>
+                          ) : (
+                            <></>
+                          )} */}
                         <div
                           className="photo"
                           onClick={handleItemOnClick}
@@ -398,36 +388,36 @@ const Header = () => {
                         <div className="text">
                           <div className="brief">
                             <div className="title">{item.name}</div>
-                            {isEdit ? (
-                              <></>
-                            ) : (
+                            {
+                              // isEdit ? (
+                              //   <></>
+                              // ) : (
                               <div
                                 className="delete"
                                 onClick={() => {
-                                  dispatch(remove([item.id]));
+                                  dispatch(removeCart([item.prod_id]));
                                 }}
                               ></div>
-                            )}
+                              // )
+                            }
                           </div>
                           <div className="details">
                             <div className="quantity">{`Quantity: ${item.quantity}`}</div>
                             <div className="price">
-                              ${`${+(item.price * item.quantity).toFixed(1)}`}
+                              ${`${+(item.cur_price * item.quantity).toFixed(1)}`}
                             </div>
                           </div>
                         </div>
                       </div>
-                    ))
-                  ) : (
-                    <div className="notice">
-                      There is nothing in the cart right now :(
-                    </div>
-                  )}
-                </div>
+                    ))}
+                  </div>
+                  :
+                  <div className="notice">
+                    There is nothing in the cart right now :(
+                  </div>
+                }
               </div>
-            ) : (
-              <></>
-            )}
+            }
           </div>
           <div className="account">
             <button
@@ -435,7 +425,7 @@ const Header = () => {
               id="account-button"
               onClick={handleAccount}
             ></button>
-            {isAccount ? <div className="account-overview"></div> : <></>}
+            {isAccountOpened ? <div className="account-overview"></div> : <></>}
           </div>
         </div>
       </div>

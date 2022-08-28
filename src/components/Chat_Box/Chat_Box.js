@@ -1,18 +1,34 @@
 import "./style.scss";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useMediaQuery } from 'react-responsive'
+
 import { close } from '../../features/chatSlice';
 
 const ChatBox = () => {
   const isChatOpened = useSelector((state) => state.chat.isChatOpened);
   const dispatch = useDispatch();
 
-  // function handleChat() {
-  //   dispatch({
-  //     type: "CLOSE_CHAT",
-  //   });
-  // }
+  const isSmallScreen = useMediaQuery({
+    query: '(max-width: 800px)'
+  })
+
+  useEffect(() => {
+    function resizeChatbox() {
+      if (isChatOpened) {
+        const innerHeight = window.innerHeight;
+        try {
+          const chatBox = document.querySelector(".chat-window");
+          if (window.matchMedia("(pointer: coarse)").matches && isSmallScreen) {
+            chatBox.style.height = `calc(${innerHeight}px - 5.75rem - 1%`;
+          }
+        }
+        catch (error) { console.log(error); }
+      }
+    }
+    window.addEventListener('resize', resizeChatbox);
+  }, [isChatOpened, isSmallScreen]);
 
   const [messages, setMessages] = useState([]);
 
@@ -22,7 +38,7 @@ const ChatBox = () => {
       chat.scrollTop = chat.scrollHeight;
     }
     catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, [messages, isChatOpened]);
 

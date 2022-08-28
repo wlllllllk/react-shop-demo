@@ -25,14 +25,37 @@ const Main = () => {
 
     const products = require("../../database/products-new.json");
 
+    let randomRecommendationList = [];
+    let temp = [];
+    do {
+        let randomProductID = Math.floor(Math.random() * 100 + 1);
+        if (!temp.includes(randomProductID)) {
+            temp.push(randomProductID);
+            let randomProduct = products.filter((product) => {
+                return product.prod_id === parseInt(randomProductID);
+            });
+            randomRecommendationList.push(randomProduct[0]);
+        }
+    } while (randomRecommendationList.length !== 3);
+    const comments = ["Lorem ipsum dolor sit amet.", "Sed id risus quis diam", "lobortis quam a felis ullamcorper viverra. Maecenas iaculis aliquet"];
+    const photos = ["https://source.unsplash.com/random/300x301", "https://source.unsplash.com/random/500x502", "https://source.unsplash.com/random/400x403"];
+    randomRecommendationList.forEach((item, index) => {
+        item.comment = comments[index];
+        item.photo = photos[index];
+    });
+
     let randomProductList = [];
-    for (let i = 0; i < 12; i++) {
-        let randomProductID = Math.floor(Math.random() * 12 + 1);
-        let randomProduct = products.filter((product) => {
-            return product.prod_id === parseInt(randomProductID);
-        });
-        randomProductList.push(randomProduct[0]);
-    }
+    let temp2 = [];
+    do {
+        let randomProductID = Math.floor(Math.random() * 100 + 1);
+        if (!temp2.includes(randomProductID)) {
+            temp2.push(randomProductID);
+            let randomProduct = products.filter((product) => {
+                return product.prod_id === parseInt(randomProductID);
+            });
+            randomProductList.push(randomProduct[0]);
+        }
+    } while (randomProductList.length !== 12);
 
     return (
         <div className="main">
@@ -46,7 +69,7 @@ const Main = () => {
                     <div id="section-2">
                         <h2>Top Selling</h2>
                         <div className="item-list">
-                            <BigItems></BigItems>
+                            <BigItems list={randomRecommendationList}></BigItems>
                         </div>
                     </div>
 

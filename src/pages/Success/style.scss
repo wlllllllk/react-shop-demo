@@ -1,4 +1,4 @@
-.error {
+.success {
   // margin-top: 5rem + 2rem;
   min-height: 100vh;
   display: flex;
@@ -17,7 +17,7 @@
     span {
       height: 25rem;
       width: 25rem;
-      background-image: url("/icons/not_found.svg");
+      background-image: url("/icons/success.svg");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;

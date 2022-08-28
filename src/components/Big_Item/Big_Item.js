@@ -4,18 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { add } from '../../features/cartSlice';
 
-const Item = (item) => {
+const Item = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // function addCart(item_add) {
-  //   dispatch({
-  //     type: "ADD_CART",
-  //     item: item_add
-  //   });
-  // }
-
-  const stars = item.item.stars;
+  const stars = item.stars;
   const star_array = [];
   for (let i = 0; i < Math.round(stars); i++) {
     star_array.push("");
@@ -31,35 +24,35 @@ const Item = (item) => {
             </div>
           ))}
           {/* <div className="number">{item.item.stars !== Math.floor(item.item.stars) ? item.item.stars : `${item.item.stars}.0`}</div> */}
-          <div className="number">{item.item.stars.toFixed(1)}</div>
+          <div className="number">{item.stars.toFixed(1)}</div>
 
         </div>
         <div className="text">
           {/* 123 */}
-          {item.item.text}
+          {item.comment}
         </div>
       </div>
 
       <div className="photo" onClick={() => { navigate("/404") }}>
         {/* <img src={`src/photos/${item.id - item.photo}.webp`} alt="" /> */}
-        <img src={item.item.photo} alt="" />
+        <img src={item.photo} alt="" />
       </div>
 
       <div className="name" onClick={() => { navigate("/404") }}>
         {/* 123 */}
-        {item.item.name}
+        {item.name}
       </div>
 
       <div className="price">
         <div className="current-price">
-          {/* $12 */}${item.item.current}
+          {/* $12 */}${item.cur_price}
         </div>
         <div className="original-price">
-          {/* $123 */}${item.item.original}
+          {/* $123 */}${item.orig_price}
         </div>
       </div>
 
-      <div className="add-to-cart" onClick={() => { dispatch(add(item.item)); }}>
+      <div className="add-to-cart" onClick={() => { dispatch(add(item)); }}>
         <svg
           width="30"
           height="31"
