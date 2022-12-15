@@ -91,6 +91,7 @@ const Footer = () => {
       </div>
       <div className="copyright">
         <p>Copyright &copy; 2022 WL. All Rights Reserved. | Last Updated: 15-12-2022</p>
+        <a href="./otp">OTP</a>
       </div>
     </footer>
   );
