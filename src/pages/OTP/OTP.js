@@ -17,7 +17,8 @@ const OTP = () => {
   // const otp = authenticator.generate(secret);
   const AuthInputRef = useRef(null);
 
-  const api_key = 'fa0c27a0516f3ee2468c5cabe8c0edd3-90ac0eb7-8102c1e8';
+  // const api_key = 'fa0c27a0516f3ee2468c5cabe8c0edd3-90ac0eb7-8102c1e8';
+  const api_key = 'key-287ad7a94e6d7b0891ccc51ceff2804d'
   const domain = 'sandbox39e9a72ba07e440f9b710f856b6f23fd.mailgun.org';
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({ username: 'api', key: api_key });
