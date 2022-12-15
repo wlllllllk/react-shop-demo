@@ -38,7 +38,7 @@ const OTP = () => {
   };
 
   const sendOTP = () => {
-    authenticator.options = { digits: 6, step: 180, window: 0 }
+    authenticator.options = { digits: 6, step: 180, window: 1 }
 
     const s = 'JBSWY3DPEHPK3PXP'
     const o = authenticator.generate(s);
