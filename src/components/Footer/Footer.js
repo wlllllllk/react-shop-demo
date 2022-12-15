@@ -1,9 +1,11 @@
 import "./style.scss";
 import { useDispatch } from "react-redux";
 import { open } from '../../features/chatSlice';
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <footer>
@@ -91,7 +93,11 @@ const Footer = () => {
       </div>
       <div className="copyright">
         <p>Copyright &copy; 2022 WL. All Rights Reserved. | Last Updated: 15-12-2022</p>
-        <a href="./otp">OTP</a>
+        <p onClick={() => {
+          navigate("/otp");
+        }}>
+          OTP
+        </p>
       </div>
     </footer>
   );

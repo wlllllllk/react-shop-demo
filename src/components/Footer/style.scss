@@ -136,10 +136,11 @@ footer {
     justify-content: center;
     align-items: center;
 
-    a {
+    p:last-child {
       margin-left: 1rem;
       color: var(--clr-main);
       text-decoration: none;
+      cursor: pointer;
     }
   }
 }
