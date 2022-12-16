@@ -38,7 +38,7 @@ const OTP = () => {
   };
 
   const sendOTP = () => {
-    authenticator.options = { digits: 6, step: 180, window: 1 }
+    authenticator.options = { digits: 6, step: 180, epoch: Date.now(), window: 1 }
 
     const s = 'JBSWY3DPEHPK3PXP'
     const o = authenticator.generate(s);
@@ -109,10 +109,8 @@ const OTP = () => {
         {/* {secret}
         <br />
         {otp} */}
-        <h1>OTP Test</h1>
-        <AuthCode allowedCharacters="numeric" onChange={handleOnChange}
-          ref={AuthInputRef}
-        />
+        <h1>Simple OTP Verification System</h1>
+        <AuthCode className="otp-input" allowedCharacters="numeric" onChange={handleOnChange} ref={AuthInputRef} />
 
         {otpSent && <h4>OTP sent!</h4>}
         {otpVerified != null ? otpVerified ? <h4>OTP verified!</h4> : <h4>OTP not verified!</h4> : <></>}
