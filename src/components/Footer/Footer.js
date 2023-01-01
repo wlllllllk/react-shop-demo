@@ -92,7 +92,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyright">
-        <p>Copyright &copy; 2023 WL. All Rights Reserved. | Last Updated: 01-01-2023</p>
+        <p>Copyright &copy; 2023 <a href="https://wlsk.design/" target="_blank">WL</a>. All Rights Reserved. | Last Updated: 01-01-2023</p>
         {/* <p onClick={() => {
           navigate("/otp");
         }}>

@@ -49,7 +49,7 @@ const ChatBox = () => {
       // Enter key is pressed
       if (key === "Enter" && event.target.value !== "") {
         let all = [...messages];
-        all = [...messages, event.target.value];
+        all = [...messages, event.target.value, `Yes, I think ${event.target.value} too.`];
         setMessages(all)
 
         document.querySelector("#input").value = "";
@@ -59,7 +59,7 @@ const ChatBox = () => {
       // Send button is pressed
       if (document.querySelector("#input").value !== "") {
         let all = [...messages];
-        all = [...messages, document.querySelector("#input").value];
+        all = [...messages, document.querySelector("#input").value, `Yes, I think ${document.querySelector("#input").value} too.`];
         setMessages(all);
 
         document.querySelector("#input").value = "";
