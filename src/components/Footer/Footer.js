@@ -92,12 +92,12 @@ const Footer = () => {
         </div>
       </div>
       <div className="copyright">
-        <p>Copyright &copy; 2022 WL. All Rights Reserved. | Last Updated: 15-12-2022</p>
-        <p onClick={() => {
+        <p>Copyright &copy; 2023 WL. All Rights Reserved. | Last Updated: 01-01-2023</p>
+        {/* <p onClick={() => {
           navigate("/otp");
         }}>
           OTP
-        </p>
+        </p> */}
       </div>
     </footer>
   );
